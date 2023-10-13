@@ -1,0 +1,27 @@
+# baseURL
+@baseURL = http://localhost:3000
+
+###
+# User Signup
+POST {{ baseURL }}/signup
+Content-Type: application/json
+
+{
+    "login": "janine@olconet.com",
+	"password": "yogi2982"
+}
+
+###
+# User Login
+POST {{ baseURL }}/login
+Content-Type: application/json
+
+{
+    "login": "janine",
+	"password": "yogi2982"
+}
+
+###
+# User Logout
+POST {{ baseURL }}/logout
+Content-Type: application/json

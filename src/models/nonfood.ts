@@ -1,7 +1,7 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 
-export interface nonfoodAttributes {
+export interface NonfoodAttributes {
   id: string;
   name: string;
   createdAt: Date;
@@ -10,12 +10,12 @@ export interface nonfoodAttributes {
   userid?: string;
 }
 
-export type nonfoodPk = 'id';
-export type nonfoodId = nonfood[nonfoodPk];
-export type nonfoodOptionalAttributes = 'id' | 'createdAt' | 'updatedAt' | 'unit_weight' | 'userid';
-export type nonfoodCreationAttributes = Optional<nonfoodAttributes, nonfoodOptionalAttributes>;
+export type NonfoodPk = 'id';
+export type NonfoodId = Nonfood[NonfoodPk];
+export type NonfoodOptionalAttributes = 'unit_weight' | 'userid';
+export type NonfoodCreationAttributes = Optional<NonfoodAttributes, NonfoodOptionalAttributes>;
 
-export class nonfood extends Model<nonfoodAttributes, nonfoodCreationAttributes> implements nonfoodAttributes {
+export class Nonfood extends Model<NonfoodAttributes, NonfoodCreationAttributes> implements NonfoodAttributes {
   id!: string;
   name!: string;
   createdAt!: Date;
@@ -23,8 +23,8 @@ export class nonfood extends Model<nonfoodAttributes, nonfoodCreationAttributes>
   unit_weight?: string;
   userid?: string;
 
-  static initModel(sequelize: Sequelize.Sequelize): typeof nonfood {
-    return nonfood.init(
+  static initModel(sequelize: Sequelize.Sequelize): typeof Nonfood {
+    return Nonfood.init(
       {
         id: {
           type: DataTypes.UUID,

@@ -1,7 +1,7 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 
-export interface foodAttributes {
+export interface FoodAttributes {
   id: string;
   name: string;
   createdAt: Date;
@@ -12,12 +12,12 @@ export interface foodAttributes {
   userid?: string;
 }
 
-export type foodPk = 'id';
-export type foodId = food[foodPk];
-export type foodOptionalAttributes = 'id' | 'createdAt' | 'updatedAt' | 'unit_weight' | 'vacuumed' | 'sealed' | 'userid';
-export type foodCreationAttributes = Optional<foodAttributes, foodOptionalAttributes>;
+export type FoodPk = 'id';
+export type FoodId = Food[FoodPk];
+export type FoodOptionalAttributes = 'unit_weight' | 'vacuumed' | 'sealed' | 'userid';
+export type FoodCreationAttributes = Optional<FoodAttributes, FoodOptionalAttributes>;
 
-export class food extends Model<foodAttributes, foodCreationAttributes> implements foodAttributes {
+export class Food extends Model<FoodAttributes, FoodCreationAttributes> implements FoodAttributes {
   id!: string;
   name!: string;
   createdAt!: Date;
@@ -27,8 +27,8 @@ export class food extends Model<foodAttributes, foodCreationAttributes> implemen
   sealed?: boolean;
   userid?: string;
 
-  static initModel(sequelize: Sequelize.Sequelize): typeof food {
-    return food.init(
+  static initModel(sequelize: Sequelize.Sequelize): typeof Food {
+    return Food.init(
       {
         id: {
           type: DataTypes.UUID,

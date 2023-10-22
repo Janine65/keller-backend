@@ -1,9 +1,9 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
-import type { object2Subplace, object2SubplaceId } from './object2Subplace';
-import type { place, placeId } from './place';
-import type { subplace, subplaceId } from './subplace';
-import type { thing, thingId } from './thing';
+import type { Object2Subplace, Object2SubplaceId } from './object2Subplace';
+import type { Place, PlaceId } from './place';
+import type { Subplace, SubplaceId } from './subplace';
+import type { Thing, ThingId } from './thing';
 
 export interface UserAttributes {
   id: string;
@@ -32,52 +32,52 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   userid?: string;
 
   // user hasMany object2Subplace via userid
-  object2subplaces!: object2Subplace[];
-  getObject2subplaces!: Sequelize.HasManyGetAssociationsMixin<object2Subplace>;
-  setObject2subplaces!: Sequelize.HasManySetAssociationsMixin<object2Subplace, object2SubplaceId>;
-  addObject2subplace!: Sequelize.HasManyAddAssociationMixin<object2Subplace, object2SubplaceId>;
-  addObject2subplaces!: Sequelize.HasManyAddAssociationsMixin<object2Subplace, object2SubplaceId>;
-  createObject2subplace!: Sequelize.HasManyCreateAssociationMixin<object2Subplace>;
-  removeObject2subplace!: Sequelize.HasManyRemoveAssociationMixin<object2Subplace, object2SubplaceId>;
-  removeObject2subplaces!: Sequelize.HasManyRemoveAssociationsMixin<object2Subplace, object2SubplaceId>;
-  hasObject2subplace!: Sequelize.HasManyHasAssociationMixin<object2Subplace, object2SubplaceId>;
-  hasObject2subplaces!: Sequelize.HasManyHasAssociationsMixin<object2Subplace, object2SubplaceId>;
+  object2subplaces!: Object2Subplace[];
+  getObject2subplaces!: Sequelize.HasManyGetAssociationsMixin<Object2Subplace>;
+  setObject2subplaces!: Sequelize.HasManySetAssociationsMixin<Object2Subplace, Object2SubplaceId>;
+  addObject2subplace!: Sequelize.HasManyAddAssociationMixin<Object2Subplace, Object2SubplaceId>;
+  addObject2subplaces!: Sequelize.HasManyAddAssociationsMixin<Object2Subplace, Object2SubplaceId>;
+  createObject2subplace!: Sequelize.HasManyCreateAssociationMixin<Object2Subplace>;
+  removeObject2subplace!: Sequelize.HasManyRemoveAssociationMixin<Object2Subplace, Object2SubplaceId>;
+  removeObject2subplaces!: Sequelize.HasManyRemoveAssociationsMixin<Object2Subplace, Object2SubplaceId>;
+  hasObject2subplace!: Sequelize.HasManyHasAssociationMixin<Object2Subplace, Object2SubplaceId>;
+  hasObject2subplaces!: Sequelize.HasManyHasAssociationsMixin<Object2Subplace, Object2SubplaceId>;
   countObject2subplaces!: Sequelize.HasManyCountAssociationsMixin;
-  // user hasMany place via userid
-  places!: place[];
-  getPlaces!: Sequelize.HasManyGetAssociationsMixin<place>;
-  setPlaces!: Sequelize.HasManySetAssociationsMixin<place, placeId>;
-  addPlace!: Sequelize.HasManyAddAssociationMixin<place, placeId>;
-  addPlaces!: Sequelize.HasManyAddAssociationsMixin<place, placeId>;
-  createPlace!: Sequelize.HasManyCreateAssociationMixin<place>;
-  removePlace!: Sequelize.HasManyRemoveAssociationMixin<place, placeId>;
-  removePlaces!: Sequelize.HasManyRemoveAssociationsMixin<place, placeId>;
-  hasPlace!: Sequelize.HasManyHasAssociationMixin<place, placeId>;
-  hasPlaces!: Sequelize.HasManyHasAssociationsMixin<place, placeId>;
+  // user hasMany Place via userid
+  places!: Place[];
+  getPlaces!: Sequelize.HasManyGetAssociationsMixin<Place>;
+  setPlaces!: Sequelize.HasManySetAssociationsMixin<Place, PlaceId>;
+  addPlace!: Sequelize.HasManyAddAssociationMixin<Place, PlaceId>;
+  addPlaces!: Sequelize.HasManyAddAssociationsMixin<Place, PlaceId>;
+  createPlace!: Sequelize.HasManyCreateAssociationMixin<Place>;
+  removePlace!: Sequelize.HasManyRemoveAssociationMixin<Place, PlaceId>;
+  removePlaces!: Sequelize.HasManyRemoveAssociationsMixin<Place, PlaceId>;
+  hasPlace!: Sequelize.HasManyHasAssociationMixin<Place, PlaceId>;
+  hasPlaces!: Sequelize.HasManyHasAssociationsMixin<Place, PlaceId>;
   countPlaces!: Sequelize.HasManyCountAssociationsMixin;
   // user hasMany subplace via userid
-  subplaces!: subplace[];
-  getSubplaces!: Sequelize.HasManyGetAssociationsMixin<subplace>;
-  setSubplaces!: Sequelize.HasManySetAssociationsMixin<subplace, subplaceId>;
-  addSubplace!: Sequelize.HasManyAddAssociationMixin<subplace, subplaceId>;
-  addSubplaces!: Sequelize.HasManyAddAssociationsMixin<subplace, subplaceId>;
-  createSubplace!: Sequelize.HasManyCreateAssociationMixin<subplace>;
-  removeSubplace!: Sequelize.HasManyRemoveAssociationMixin<subplace, subplaceId>;
-  removeSubplaces!: Sequelize.HasManyRemoveAssociationsMixin<subplace, subplaceId>;
-  hasSubplace!: Sequelize.HasManyHasAssociationMixin<subplace, subplaceId>;
-  hasSubplaces!: Sequelize.HasManyHasAssociationsMixin<subplace, subplaceId>;
+  subplaces!: Subplace[];
+  getSubplaces!: Sequelize.HasManyGetAssociationsMixin<Subplace>;
+  setSubplaces!: Sequelize.HasManySetAssociationsMixin<Subplace, SubplaceId>;
+  addSubplace!: Sequelize.HasManyAddAssociationMixin<Subplace, SubplaceId>;
+  addSubplaces!: Sequelize.HasManyAddAssociationsMixin<Subplace, SubplaceId>;
+  createSubplace!: Sequelize.HasManyCreateAssociationMixin<Subplace>;
+  removeSubplace!: Sequelize.HasManyRemoveAssociationMixin<Subplace, SubplaceId>;
+  removeSubplaces!: Sequelize.HasManyRemoveAssociationsMixin<Subplace, SubplaceId>;
+  hasSubplace!: Sequelize.HasManyHasAssociationMixin<Subplace, SubplaceId>;
+  hasSubplaces!: Sequelize.HasManyHasAssociationsMixin<Subplace, SubplaceId>;
   countSubplaces!: Sequelize.HasManyCountAssociationsMixin;
-  // user hasMany thing via userid
-  things!: thing[];
-  getThings!: Sequelize.HasManyGetAssociationsMixin<thing>;
-  setThings!: Sequelize.HasManySetAssociationsMixin<thing, thingId>;
-  addThing!: Sequelize.HasManyAddAssociationMixin<thing, thingId>;
-  addThings!: Sequelize.HasManyAddAssociationsMixin<thing, thingId>;
-  createThing!: Sequelize.HasManyCreateAssociationMixin<thing>;
-  removeThing!: Sequelize.HasManyRemoveAssociationMixin<thing, thingId>;
-  removeThings!: Sequelize.HasManyRemoveAssociationsMixin<thing, thingId>;
-  hasThing!: Sequelize.HasManyHasAssociationMixin<thing, thingId>;
-  hasThings!: Sequelize.HasManyHasAssociationsMixin<thing, thingId>;
+  // user hasMany Thing via userid
+  things!: Thing[];
+  getThings!: Sequelize.HasManyGetAssociationsMixin<Thing>;
+  setThings!: Sequelize.HasManySetAssociationsMixin<Thing, ThingId>;
+  addThing!: Sequelize.HasManyAddAssociationMixin<Thing, ThingId>;
+  addThings!: Sequelize.HasManyAddAssociationsMixin<Thing, ThingId>;
+  createThing!: Sequelize.HasManyCreateAssociationMixin<Thing>;
+  removeThing!: Sequelize.HasManyRemoveAssociationMixin<Thing, ThingId>;
+  removeThings!: Sequelize.HasManyRemoveAssociationsMixin<Thing, ThingId>;
+  hasThing!: Sequelize.HasManyHasAssociationMixin<Thing, ThingId>;
+  hasThings!: Sequelize.HasManyHasAssociationsMixin<Thing, ThingId>;
   countThings!: Sequelize.HasManyCountAssociationsMixin;
   // user belongsTo user via userid
   user!: User;

@@ -1,41 +1,42 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
-import type { subplace, subplaceId } from './subplace';
+import type { Subplace, SubplaceId } from './subplace';
 import type { User, UserId } from './user';
 
-export interface placeAttributes {
+export interface PlaceAttributes {
   id: string;
   name: string;
-  type: 'tiefkuehl' | 'kuehl' | 'offen';
+  type: PlaceType;
   createdAt: Date;
   updatedAt: Date;
   userid?: string;
 }
 
-export type placePk = 'id';
-export type placeId = place[placePk];
-export type placeOptionalAttributes = 'id' | 'createdAt' | 'updatedAt' | 'userid';
-export type placeCreationAttributes = Optional<placeAttributes, placeOptionalAttributes>;
+export type PlacePk = 'id';
+export type PlaceId = Place[PlacePk];
+export enum PlaceType { 'tiefkuehl', 'kuehl', 'offen'}
+export type PlaceOptionalAttributes = 'userid';
+export type PlaceCreationAttributes = Optional<PlaceAttributes, PlaceOptionalAttributes>;
 
-export class place extends Model<placeAttributes, placeCreationAttributes> implements placeAttributes {
+export class Place extends Model<PlaceAttributes, PlaceCreationAttributes> implements PlaceAttributes {
   id!: string;
   name!: string;
-  type!: 'tiefkuehl' | 'kuehl' | 'offen';
+  type!: PlaceType;
   createdAt!: Date;
   updatedAt!: Date;
   userid?: string;
 
   // place hasMany subplace via placeid
-  subplaces!: subplace[];
-  getSubplaces!: Sequelize.HasManyGetAssociationsMixin<subplace>;
-  setSubplaces!: Sequelize.HasManySetAssociationsMixin<subplace, subplaceId>;
-  addSubplace!: Sequelize.HasManyAddAssociationMixin<subplace, subplaceId>;
-  addSubplaces!: Sequelize.HasManyAddAssociationsMixin<subplace, subplaceId>;
-  createSubplace!: Sequelize.HasManyCreateAssociationMixin<subplace>;
-  removeSubplace!: Sequelize.HasManyRemoveAssociationMixin<subplace, subplaceId>;
-  removeSubplaces!: Sequelize.HasManyRemoveAssociationsMixin<subplace, subplaceId>;
-  hasSubplace!: Sequelize.HasManyHasAssociationMixin<subplace, subplaceId>;
-  hasSubplaces!: Sequelize.HasManyHasAssociationsMixin<subplace, subplaceId>;
+  subplaces!: Subplace[];
+  getSubplaces!: Sequelize.HasManyGetAssociationsMixin<Subplace>;
+  setSubplaces!: Sequelize.HasManySetAssociationsMixin<Subplace, SubplaceId>;
+  addSubplace!: Sequelize.HasManyAddAssociationMixin<Subplace, SubplaceId>;
+  addSubplaces!: Sequelize.HasManyAddAssociationsMixin<Subplace, SubplaceId>;
+  createSubplace!: Sequelize.HasManyCreateAssociationMixin<Subplace>;
+  removeSubplace!: Sequelize.HasManyRemoveAssociationMixin<Subplace, SubplaceId>;
+  removeSubplaces!: Sequelize.HasManyRemoveAssociationsMixin<Subplace, SubplaceId>;
+  hasSubplace!: Sequelize.HasManyHasAssociationMixin<Subplace, SubplaceId>;
+  hasSubplaces!: Sequelize.HasManyHasAssociationsMixin<Subplace, SubplaceId>;
   countSubplaces!: Sequelize.HasManyCountAssociationsMixin;
   // place belongsTo user via userid
   user!: User;
@@ -43,8 +44,8 @@ export class place extends Model<placeAttributes, placeCreationAttributes> imple
   setUser!: Sequelize.BelongsToSetAssociationMixin<User, UserId>;
   createUser!: Sequelize.BelongsToCreateAssociationMixin<User>;
 
-  static initModel(sequelize: Sequelize.Sequelize): typeof place {
-    return place.init(
+  static initModel(sequelize: Sequelize.Sequelize): typeof Place {
+    return Place.init(
       {
         id: {
           type: DataTypes.UUID,

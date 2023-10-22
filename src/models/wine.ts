@@ -1,7 +1,7 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 
-export interface wineAttributes {
+export interface WineAttributes {
   id: string;
   name: string;
   createdAt: Date;
@@ -13,12 +13,12 @@ export interface wineAttributes {
   userid?: string;
 }
 
-export type winePk = 'id';
-export type wineId = wine[winePk];
-export type wineOptionalAttributes = 'id' | 'createdAt' | 'updatedAt' | 'country' | 'region' | 'year' | 'grapes' | 'userid';
-export type wineCreationAttributes = Optional<wineAttributes, wineOptionalAttributes>;
+export type WinePk = 'id';
+export type WineId = Wine[WinePk];
+export type WineOptionalAttributes = 'country' | 'region' | 'year' | 'grapes' | 'userid';
+export type WineCreationAttributes = Optional<WineAttributes, WineOptionalAttributes>;
 
-export class wine extends Model<wineAttributes, wineCreationAttributes> implements wineAttributes {
+export class Wine extends Model<WineAttributes, WineCreationAttributes> implements WineAttributes {
   id!: string;
   name!: string;
   createdAt!: Date;
@@ -29,8 +29,8 @@ export class wine extends Model<wineAttributes, wineCreationAttributes> implemen
   grapes?: string[];
   userid?: string;
 
-  static initModel(sequelize: Sequelize.Sequelize): typeof wine {
-    return wine.init(
+  static initModel(sequelize: Sequelize.Sequelize): typeof Wine {
+    return Wine.init(
       {
         id: {
           type: DataTypes.UUID,

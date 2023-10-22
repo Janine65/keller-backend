@@ -1,10 +1,10 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
-import type { subplace, subplaceId } from './subplace';
-import type { thing, thingId } from './thing';
+import type { Subplace, SubplaceId } from './subplace';
+import type { Thing, ThingId } from './thing';
 import type { User, UserId } from './user';
 
-export interface object2SubplaceAttributes {
+export interface Object2SubplaceAttributes {
   objectid: string;
   subplaceid: string;
   weight?: number;
@@ -12,12 +12,12 @@ export interface object2SubplaceAttributes {
   userid?: string;
 }
 
-export type object2SubplacePk = 'objectid' | 'subplaceid';
-export type object2SubplaceId = object2Subplace[object2SubplacePk];
-export type object2SubplaceOptionalAttributes = 'weight' | 'count' | 'userid';
-export type object2SubplaceCreationAttributes = Optional<object2SubplaceAttributes, object2SubplaceOptionalAttributes>;
+export type Object2SubplacePk = 'objectid' | 'subplaceid';
+export type Object2SubplaceId = Object2Subplace[Object2SubplacePk];
+export type Object2SubplaceOptionalAttributes = 'weight' | 'count' | 'userid';
+export type Object2SubplaceCreationAttributes = Optional<Object2SubplaceAttributes, Object2SubplaceOptionalAttributes>;
 
-export class object2Subplace extends Model<object2SubplaceAttributes, object2SubplaceCreationAttributes> implements object2SubplaceAttributes {
+export class Object2Subplace extends Model<Object2SubplaceAttributes, Object2SubplaceCreationAttributes> implements Object2SubplaceAttributes {
   objectid!: string;
   subplaceid!: string;
   weight?: number;
@@ -25,23 +25,23 @@ export class object2Subplace extends Model<object2SubplaceAttributes, object2Sub
   userid?: string;
 
   // object2Subplace belongsTo subplace via subplaceid
-  subplace!: subplace;
-  getSubplace!: Sequelize.BelongsToGetAssociationMixin<subplace>;
-  setSubplace!: Sequelize.BelongsToSetAssociationMixin<subplace, subplaceId>;
-  createSubplace!: Sequelize.BelongsToCreateAssociationMixin<subplace>;
-  // object2Subplace belongsTo thing via objectid
-  object!: thing;
-  getObject!: Sequelize.BelongsToGetAssociationMixin<thing>;
-  setObject!: Sequelize.BelongsToSetAssociationMixin<thing, thingId>;
-  createObject!: Sequelize.BelongsToCreateAssociationMixin<thing>;
+  subplace!: Subplace;
+  getSubplace!: Sequelize.BelongsToGetAssociationMixin<Subplace>;
+  setSubplace!: Sequelize.BelongsToSetAssociationMixin<Subplace, SubplaceId>;
+  createSubplace!: Sequelize.BelongsToCreateAssociationMixin<Subplace>;
+  // object2Subplace belongsTo Thing via objectid
+  object!: Thing;
+  getObject!: Sequelize.BelongsToGetAssociationMixin<Thing>;
+  setObject!: Sequelize.BelongsToSetAssociationMixin<Thing, ThingId>;
+  createObject!: Sequelize.BelongsToCreateAssociationMixin<Thing>;
   // object2Subplace belongsTo user via userid
   user!: User;
   getUser!: Sequelize.BelongsToGetAssociationMixin<User>;
   setUser!: Sequelize.BelongsToSetAssociationMixin<User, UserId>;
   createUser!: Sequelize.BelongsToCreateAssociationMixin<User>;
 
-  static initModel(sequelize: Sequelize.Sequelize): typeof object2Subplace {
-    return object2Subplace.init(
+  static initModel(sequelize: Sequelize.Sequelize): typeof Object2Subplace {
+    return Object2Subplace.init(
       {
         objectid: {
           type: DataTypes.UUID,

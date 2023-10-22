@@ -1,20 +1,20 @@
 import type { Sequelize } from 'sequelize';
-import { food as _food } from './food';
-import type { foodAttributes, foodCreationAttributes } from './food';
-import { nonfood as _nonfood } from './nonfood';
-import type { nonfoodAttributes, nonfoodCreationAttributes } from './nonfood';
-import { object2Subplace as _object2Subplace } from './object2Subplace';
-import type { object2SubplaceAttributes, object2SubplaceCreationAttributes } from './object2Subplace';
-import { place as _place } from './place';
-import type { placeAttributes, placeCreationAttributes } from './place';
-import { subplace as _subplace } from './subplace';
-import type { subplaceAttributes, subplaceCreationAttributes } from './subplace';
-import { thing as _thing } from './thing';
-import type { thingAttributes, thingCreationAttributes } from './thing';
+import { Food as _food } from './food';
+import type { FoodAttributes, FoodCreationAttributes } from './food';
+import { Nonfood as _nonfood } from './nonfood';
+import type { NonfoodAttributes, NonfoodCreationAttributes } from './nonfood';
+import { Object2Subplace as _object2Subplace } from './object2Subplace';
+import type { Object2SubplaceAttributes, Object2SubplaceCreationAttributes } from './object2Subplace';
+import { Place as _place } from './place';
+import type { PlaceAttributes, PlaceCreationAttributes } from './place';
+import { Subplace as _subplace } from './subplace';
+import type { SubplaceAttributes, SubplaceCreationAttributes } from './subplace';
+import { Thing as _thing } from './thing';
+import type { ThingAttributes, thingCreationAttributes } from './thing';
 import { User as _user } from './user';
 import type { UserAttributes, UserCreationAttributes } from './user';
-import { wine as _wine } from './wine';
-import type { wineAttributes, wineCreationAttributes } from './wine';
+import { Wine as _wine } from './wine';
+import type { WineAttributes, WineCreationAttributes } from './wine';
 
 export {
   _food as food,
@@ -22,28 +22,28 @@ export {
   _object2Subplace as object2Subplace,
   _place as place,
   _subplace as subplace,
-  _thing as thing,
+  _thing as Thing,
   _user as user,
   _wine as wine,
 };
 
 export type {
-  foodAttributes,
-  foodCreationAttributes,
-  nonfoodAttributes,
-  nonfoodCreationAttributes,
-  object2SubplaceAttributes,
-  object2SubplaceCreationAttributes,
-  placeAttributes,
-  placeCreationAttributes,
-  subplaceAttributes,
-  subplaceCreationAttributes,
-  thingAttributes,
+  FoodAttributes as foodAttributes,
+  FoodCreationAttributes as foodCreationAttributes,
+  NonfoodAttributes as nonfoodAttributes,
+  NonfoodCreationAttributes as nonfoodCreationAttributes,
+  Object2SubplaceAttributes as object2SubplaceAttributes,
+  Object2SubplaceCreationAttributes as object2SubplaceCreationAttributes,
+  PlaceAttributes,
+  PlaceCreationAttributes,
+  SubplaceAttributes as subplaceAttributes,
+  SubplaceCreationAttributes as subplaceCreationAttributes,
+  ThingAttributes,
   thingCreationAttributes,
   UserAttributes as userAttributes,
   UserCreationAttributes as userCreationAttributes,
-  wineAttributes,
-  wineCreationAttributes,
+  WineAttributes as wineAttributes,
+  WineCreationAttributes as wineCreationAttributes,
 };
 
 export function initModels(sequelize: Sequelize) {

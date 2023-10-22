@@ -123,6 +123,20 @@ paths:
         500:
           description: 'Server Error'
 
+
+# [GET] places
+  /places:
+    get:
+      tags:
+      - places
+      summary: Find All Places
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+
 # definitions
 definitions:
   authuser:

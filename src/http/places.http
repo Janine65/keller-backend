@@ -1,0 +1,34 @@
+# baseURL
+@baseURL = http://localhost:3000
+
+###
+# Find All Users
+GET {{ baseURL }}/places
+
+###
+# Find User By Id
+GET {{ baseURL }}/places/1
+
+###
+# Create User
+POST {{ baseURL }}/places
+Content-Type: application/json
+
+{
+    "name": "Tiefkühler",
+	"type": "tiefkuehl"
+}
+
+###
+# Modify User By Id
+PUT {{ baseURL }}/places/1
+Content-Type: application/json
+
+{
+    "name": "Tiefkühler",
+	"type": "tiefkuehl"
+}
+
+###
+# Delete User By Id
+DELETE {{ baseURL }}/places/1

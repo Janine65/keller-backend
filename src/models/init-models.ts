@@ -13,8 +13,10 @@ import { Thing as _thing } from './thing';
 import type { ThingAttributes, thingCreationAttributes } from './thing';
 import { User as _user } from './user';
 import type { UserAttributes, UserCreationAttributes } from './user';
-import { Wine as _wine } from './wine';
-import type { WineAttributes, WineCreationAttributes } from './wine';
+import { Alcoholic as _alcoholic } from './alcoholic';
+import type { AlcoholicAttributes, AlcoholicCreationAttributes } from './alcoholic';
+import { Nonalcoholic as _nonalcoholic } from './nonalcoholic';
+import type { NonalcoholicAttributes, NonalcoholicCreationAttributes } from './nonalcoholic';
 
 export {
   _food as food,
@@ -24,7 +26,8 @@ export {
   _subplace as subplace,
   _thing as Thing,
   _user as user,
-  _wine as wine,
+  _alcoholic as alcoholic,
+  _nonalcoholic as nonalcoholic,
 };
 
 export type {
@@ -42,8 +45,10 @@ export type {
   thingCreationAttributes,
   UserAttributes as userAttributes,
   UserCreationAttributes as userCreationAttributes,
-  WineAttributes as wineAttributes,
-  WineCreationAttributes as wineCreationAttributes,
+  AlcoholicAttributes as alcoholicAttributes,
+  AlcoholicCreationAttributes as alcoholicCreationAttributes,
+  NonalcoholicAttributes as nonalcoholicAttributes,
+  NonalcoholicCreationAttributes as nonalcoholicCreationAttributes,
 };
 
 export function initModels(sequelize: Sequelize) {
@@ -54,7 +59,8 @@ export function initModels(sequelize: Sequelize) {
   const subplace = _subplace.initModel(sequelize);
   const thing = _thing.initModel(sequelize);
   const user = _user.initModel(sequelize);
-  const wine = _wine.initModel(sequelize);
+  const alcoholic = _alcoholic.initModel(sequelize);
+  const nonalcoholic = _nonalcoholic.initModel(sequelize);
 
   subplace.belongsToMany(thing, { as: 'objectid_things', through: object2Subplace, foreignKey: 'subplaceid', otherKey: 'objectid' });
   thing.belongsToMany(subplace, { as: 'subplaceid_subplaces', through: object2Subplace, foreignKey: 'objectid', otherKey: 'subplaceid' });
@@ -83,6 +89,7 @@ export function initModels(sequelize: Sequelize) {
     subplace: subplace,
     thing: thing,
     user: user,
-    wine: wine,
+    alcoholic: alcoholic,
+    nonalcoholic: nonalcoholic,
   };
 }

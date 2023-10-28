@@ -6,7 +6,7 @@ import type { Thing, ThingId } from './thing';
 import type { User, UserId } from './user';
 
 export interface SubplaceAttributes {
-  id: string;
+  id: number;
   name: string;
   createdAt: Date;
   updatedAt: Date;
@@ -16,11 +16,11 @@ export interface SubplaceAttributes {
 
 export type SubplacePk = 'id';
 export type SubplaceId = Subplace[SubplacePk];
-export type SubplaceOptionalAttributes = 'userid';
+export type SubplaceOptionalAttributes = 'id' | 'createdAt' | 'updatedAt' | 'userid';
 export type SubplaceCreationAttributes = Optional<SubplaceAttributes, SubplaceOptionalAttributes>;
 
 export class Subplace extends Model<SubplaceAttributes, SubplaceCreationAttributes> implements SubplaceAttributes {
-  id!: string;
+  id!: number;
   name!: string;
   createdAt!: Date;
   updatedAt!: Date;
@@ -66,9 +66,9 @@ export class Subplace extends Model<SubplaceAttributes, SubplaceCreationAttribut
     return Subplace.init(
       {
         id: {
-          type: DataTypes.UUID,
+          type: DataTypes.INTEGER,
           allowNull: false,
-          defaultValue: DataTypes.UUIDV4,
+          autoIncrement: true,
           primaryKey: true,
         },
         name: {
@@ -76,7 +76,7 @@ export class Subplace extends Model<SubplaceAttributes, SubplaceCreationAttribut
           allowNull: false,
         },
         placeid: {
-          type: DataTypes.UUID,
+          type: DataTypes.INTEGER,
           allowNull: false,
           references: {
             model: 'place',
@@ -84,7 +84,7 @@ export class Subplace extends Model<SubplaceAttributes, SubplaceCreationAttribut
           },
         },
         userid: {
-          type: DataTypes.UUID,
+          type: DataTypes.INTEGER,
           allowNull: true,
           references: {
             model: 'users',

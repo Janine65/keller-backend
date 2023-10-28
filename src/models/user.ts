@@ -6,7 +6,7 @@ import type { Subplace, SubplaceId } from './subplace';
 import type { Thing, ThingId } from './thing';
 
 export interface UserAttributes {
-  id: string;
+  id: number;
   login: string;
   password: string;
   name: string;
@@ -22,7 +22,7 @@ export type UserOptionalAttributes = 'userid';
 export type UserCreationAttributes = Optional<UserAttributes, UserOptionalAttributes>;
 
 export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
-  id!: string;
+  id!: number;
   login!: string;
   password!: string;
   name!: string;
@@ -89,9 +89,9 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     return User.init(
       {
         id: {
-          type: DataTypes.UUID,
+          type: DataTypes.INTEGER,
           allowNull: false,
-          defaultValue: DataTypes.UUIDV4,
+          autoIncrement: true,
           primaryKey: true,
         },
         login: {
@@ -111,7 +111,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
           allowNull: false,
         },
         userid: {
-          type: DataTypes.UUID,
+          type: DataTypes.INTEGER,
           allowNull: true,
           references: {
             model: 'users',

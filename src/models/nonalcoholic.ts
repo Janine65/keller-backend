@@ -1,34 +1,32 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 
-export interface FoodAttributes {
+export interface NonalcoholicAttributes {
   id: number;
   name: string;
   createdAt: Date;
   updatedAt: Date;
-  unit_weight?: string;
-  vacuumed?: boolean;
-  sealed?: boolean;
+  units?: string;
+  weight?: number;
   userid?: string;
 }
 
-export type FoodPk = 'id';
-export type FoodId = Food[FoodPk];
-export type FoodOptionalAttributes = 'unit_weight' | 'vacuumed' | 'sealed' | 'userid';
-export type FoodCreationAttributes = Optional<FoodAttributes, FoodOptionalAttributes>;
+export type NonalcoholicPk = 'id';
+export type NonalcoholicId = Nonalcoholic[NonalcoholicPk];
+export type NonalcoholicOptionalAttributes = 'weight' | 'units' | 'userid';
+export type NonalcoholicCreationAttributes = Optional<NonalcoholicAttributes, NonalcoholicOptionalAttributes>;
 
-export class Food extends Model<FoodAttributes, FoodCreationAttributes> implements FoodAttributes {
+export class Nonalcoholic extends Model<NonalcoholicAttributes, NonalcoholicCreationAttributes> implements NonalcoholicAttributes {
   id!: number;
   name!: string;
   createdAt!: Date;
   updatedAt!: Date;
-  unit_weight?: string;
-  vacuumed?: boolean;
-  sealed?: boolean;
+  units?: string;
+  weight?: number;
   userid?: string;
 
-  static initModel(sequelize: Sequelize.Sequelize): typeof Food {
-    return Food.init(
+  static initModel(sequelize: Sequelize.Sequelize): typeof Nonalcoholic {
+    return Nonalcoholic.init(
       {
         id: {
           type: DataTypes.INTEGER,
@@ -40,19 +38,13 @@ export class Food extends Model<FoodAttributes, FoodCreationAttributes> implemen
           type: DataTypes.TEXT,
           allowNull: false,
         },
-        unit_weight: {
+        units: {
           type: DataTypes.TEXT,
           allowNull: true,
         },
-        vacuumed: {
-          type: DataTypes.BOOLEAN,
+        weight: {
+          type: DataTypes.DECIMAL(6,3),
           allowNull: true,
-          defaultValue: false,
-        },
-        sealed: {
-          type: DataTypes.BOOLEAN,
-          allowNull: true,
-          defaultValue: false,
         },
         userid: {
           type: DataTypes.INTEGER,
@@ -63,7 +55,7 @@ export class Food extends Model<FoodAttributes, FoodCreationAttributes> implemen
       },
       {
         sequelize,
-        tableName: 'food',
+        tableName: 'nonalcoholic',
         schema: 'public',
         timestamps: true,
         freezeTableName: true,

@@ -5,7 +5,7 @@ import type { Subplace, SubplaceId } from './subplace';
 import type { User, UserId } from './user';
 
 export interface ThingAttributes {
-  id: string;
+  id: number;
   name: string;
   createdAt: Date;
   updatedAt: Date;
@@ -14,11 +14,11 @@ export interface ThingAttributes {
 
 export type ThingPk = 'id';
 export type ThingId = Thing[ThingPk];
-export type ThingOptionalAttributes = 'userid';
+export type ThingOptionalAttributes = 'id' | 'createdAt' | 'updatedAt' | 'userid';
 export type thingCreationAttributes = Optional<ThingAttributes, ThingOptionalAttributes>;
 
 export class Thing extends Model<ThingAttributes, thingCreationAttributes> implements ThingAttributes {
-  id!: string;
+  id!: number;
   name!: string;
   createdAt!: Date;
   updatedAt!: Date;
@@ -58,9 +58,9 @@ export class Thing extends Model<ThingAttributes, thingCreationAttributes> imple
     return Thing.init(
       {
         id: {
-          type: DataTypes.UUID,
+          type: DataTypes.INTEGER,
           allowNull: false,
-          defaultValue: DataTypes.UUIDV4,
+          autoIncrement: true,
           primaryKey: true,
         },
         name: {
@@ -68,7 +68,7 @@ export class Thing extends Model<ThingAttributes, thingCreationAttributes> imple
           allowNull: false,
         },
         userid: {
-          type: DataTypes.UUID,
+          type: DataTypes.INTEGER,
           allowNull: true,
           references: {
             model: 'users',

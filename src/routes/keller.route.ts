@@ -14,5 +14,8 @@ export class KellerRoute implements Routes {
 
   private initializeRoutes() {
     this.router.get('/places', AuthMiddleware, this.place.getPlaces)
+    this.router.put('/places/insert', AuthMiddleware, this.place.insertPlace)
+    this.router.post('/places/update', AuthMiddleware, this.place.updatePlace)
+    this.router.delete('/places/delete', AuthMiddleware, this.place.deletePlace)
   }
 }

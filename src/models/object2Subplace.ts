@@ -44,7 +44,7 @@ export class Object2Subplace extends Model<Object2SubplaceAttributes, Object2Sub
     return Object2Subplace.init(
       {
         objectid: {
-          type: DataTypes.UUID,
+          type: DataTypes.INTEGER,
           allowNull: false,
           primaryKey: true,
           references: {
@@ -53,7 +53,7 @@ export class Object2Subplace extends Model<Object2SubplaceAttributes, Object2Sub
           },
         },
         subplaceid: {
-          type: DataTypes.UUID,
+          type: DataTypes.INTEGER,
           allowNull: false,
           primaryKey: true,
           references: {
@@ -70,7 +70,7 @@ export class Object2Subplace extends Model<Object2SubplaceAttributes, Object2Sub
           allowNull: true,
         },
         userid: {
-          type: DataTypes.UUID,
+          type: DataTypes.INTEGER,
           allowNull: true,
           references: {
             model: 'users',

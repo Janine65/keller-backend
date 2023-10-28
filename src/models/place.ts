@@ -4,7 +4,7 @@ import type { Subplace, SubplaceId } from './subplace';
 import type { User, UserId } from './user';
 
 export interface PlaceAttributes {
-  id: string;
+  id?: number;
   name: string;
   type: PlaceType;
   createdAt: Date;
@@ -15,11 +15,11 @@ export interface PlaceAttributes {
 export type PlacePk = 'id';
 export type PlaceId = Place[PlacePk];
 export enum PlaceType { 'tiefkuehl', 'kuehl', 'offen'}
-export type PlaceOptionalAttributes = 'userid';
+export type PlaceOptionalAttributes = 'id' | 'createdAt' | 'updatedAt' | 'userid';
 export type PlaceCreationAttributes = Optional<PlaceAttributes, PlaceOptionalAttributes>;
 
 export class Place extends Model<PlaceAttributes, PlaceCreationAttributes> implements PlaceAttributes {
-  id!: string;
+  id?: number;
   name!: string;
   type!: PlaceType;
   createdAt!: Date;
@@ -48,9 +48,9 @@ export class Place extends Model<PlaceAttributes, PlaceCreationAttributes> imple
     return Place.init(
       {
         id: {
-          type: DataTypes.UUID,
+          type: DataTypes.INTEGER,
           allowNull: false,
-          defaultValue: DataTypes.UUIDV4,
+          autoIncrement: true,
           primaryKey: true,
         },
         name: {
@@ -62,7 +62,7 @@ export class Place extends Model<PlaceAttributes, PlaceCreationAttributes> imple
           allowNull: false,
         },
         userid: {
-          type: DataTypes.UUID,
+          type: DataTypes.INTEGER,
           allowNull: true,
           references: {
             model: 'users',

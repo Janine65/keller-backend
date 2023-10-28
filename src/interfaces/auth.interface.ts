@@ -2,7 +2,7 @@ import { Request } from 'express';
 import { User } from '@models/user';
 
 export interface DataStoredInToken {
-  id: string;
+  id: number;
 }
 
 export interface TokenData {

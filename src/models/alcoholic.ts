@@ -1,8 +1,8 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 
-export interface WineAttributes {
-  id: string;
+export interface AlcoholicAttributes {
+  id: number;
   name: string;
   createdAt: Date;
   updatedAt: Date;
@@ -13,13 +13,13 @@ export interface WineAttributes {
   userid?: string;
 }
 
-export type WinePk = 'id';
-export type WineId = Wine[WinePk];
-export type WineOptionalAttributes = 'country' | 'region' | 'year' | 'grapes' | 'userid';
-export type WineCreationAttributes = Optional<WineAttributes, WineOptionalAttributes>;
+export type AlcoholicPk = 'id';
+export type AlcoholicId = Alcoholic[AlcoholicPk];
+export type AlcoholicOptionalAttributes = 'country' | 'region' | 'year' | 'grapes' | 'userid';
+export type AlcoholicCreationAttributes = Optional<AlcoholicAttributes, AlcoholicOptionalAttributes>;
 
-export class Wine extends Model<WineAttributes, WineCreationAttributes> implements WineAttributes {
-  id!: string;
+export class Alcoholic extends Model<AlcoholicAttributes, AlcoholicCreationAttributes> implements AlcoholicAttributes {
+  id!: number;
   name!: string;
   createdAt!: Date;
   updatedAt!: Date;
@@ -29,13 +29,13 @@ export class Wine extends Model<WineAttributes, WineCreationAttributes> implemen
   grapes?: string[];
   userid?: string;
 
-  static initModel(sequelize: Sequelize.Sequelize): typeof Wine {
-    return Wine.init(
+  static initModel(sequelize: Sequelize.Sequelize): typeof Alcoholic {
+    return Alcoholic.init(
       {
         id: {
-          type: DataTypes.UUID,
+          type: DataTypes.INTEGER,
           allowNull: false,
-          defaultValue: DataTypes.UUIDV4,
+          autoIncrement: true,
           primaryKey: true,
         },
         name: {
@@ -59,7 +59,7 @@ export class Wine extends Model<WineAttributes, WineCreationAttributes> implemen
           allowNull: true,
         },
         userid: {
-          type: DataTypes.UUID,
+          type: DataTypes.INTEGER,
           allowNull: true,
         },
         createdAt: '',
@@ -67,7 +67,7 @@ export class Wine extends Model<WineAttributes, WineCreationAttributes> implemen
       },
       {
         sequelize,
-        tableName: 'wine',
+        tableName: 'alcoholic',
         schema: 'public',
         timestamps: true,
         freezeTableName: true,

@@ -6,13 +6,13 @@ export interface NonfoodAttributes {
   name: string;
   createdAt: Date;
   updatedAt: Date;
-  unit_weight?: string;
-  userid?: string;
+  unit_weight: string;
+  userid?: number;
 }
 
 export type NonfoodPk = 'id';
 export type NonfoodId = Nonfood[NonfoodPk];
-export type NonfoodOptionalAttributes = 'unit_weight' | 'userid';
+export type NonfoodOptionalAttributes = 'userid';
 export type NonfoodCreationAttributes = Optional<NonfoodAttributes, NonfoodOptionalAttributes>;
 
 export class Nonfood extends Model<NonfoodAttributes, NonfoodCreationAttributes> implements NonfoodAttributes {
@@ -20,8 +20,8 @@ export class Nonfood extends Model<NonfoodAttributes, NonfoodCreationAttributes>
   name!: string;
   createdAt!: Date;
   updatedAt!: Date;
-  unit_weight?: string;
-  userid?: string;
+  unit_weight: string;
+  userid?: number;
 
   static initModel(sequelize: Sequelize.Sequelize): typeof Nonfood {
     return Nonfood.init(
@@ -38,7 +38,7 @@ export class Nonfood extends Model<NonfoodAttributes, NonfoodCreationAttributes>
         },
         unit_weight: {
           type: DataTypes.TEXT,
-          allowNull: true,
+          allowNull: false,
         },
         userid: {
           type: DataTypes.INTEGER,

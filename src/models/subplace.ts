@@ -10,8 +10,8 @@ export interface SubplaceAttributes {
   name: string;
   createdAt: Date;
   updatedAt: Date;
-  placeid: string;
-  userid?: string;
+  placeid: number;
+  userid?: number;
 }
 
 export type SubplacePk = 'id';
@@ -24,8 +24,8 @@ export class Subplace extends Model<SubplaceAttributes, SubplaceCreationAttribut
   name!: string;
   createdAt!: Date;
   updatedAt!: Date;
-  placeid!: string;
-  userid?: string;
+  placeid!: number;
+  userid?: number;
 
   // subplace belongsTo place via placeid
   place!: Place;

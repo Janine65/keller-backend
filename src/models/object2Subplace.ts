@@ -5,11 +5,11 @@ import type { Thing, ThingId } from './thing';
 import type { User, UserId } from './user';
 
 export interface Object2SubplaceAttributes {
-  objectid: string;
-  subplaceid: string;
+  objectid: number;
+  subplaceid: number;
   weight?: number;
   count?: number;
-  userid?: string;
+  userid?: number;
 }
 
 export type Object2SubplacePk = 'objectid' | 'subplaceid';
@@ -18,11 +18,11 @@ export type Object2SubplaceOptionalAttributes = 'weight' | 'count' | 'userid';
 export type Object2SubplaceCreationAttributes = Optional<Object2SubplaceAttributes, Object2SubplaceOptionalAttributes>;
 
 export class Object2Subplace extends Model<Object2SubplaceAttributes, Object2SubplaceCreationAttributes> implements Object2SubplaceAttributes {
-  objectid!: string;
-  subplaceid!: string;
+  objectid!: number;
+  subplaceid!: number;
   weight?: number;
   count?: number;
-  userid?: string;
+  userid?: number;
 
   // object2Subplace belongsTo subplace via subplaceid
   subplace!: Subplace;
@@ -82,7 +82,7 @@ export class Object2Subplace extends Model<Object2SubplaceAttributes, Object2Sub
         sequelize,
         tableName: 'object2subplace',
         schema: 'public',
-        timestamps: true,
+        timestamps: false,
         freezeTableName: true,
         indexes: [
           {

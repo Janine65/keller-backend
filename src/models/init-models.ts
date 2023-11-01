@@ -7,6 +7,8 @@ import { Object2Subplace as _object2Subplace } from './object2Subplace';
 import type { Object2SubplaceAttributes, Object2SubplaceCreationAttributes } from './object2Subplace';
 import { Place as _place } from './place';
 import type { PlaceAttributes, PlaceCreationAttributes } from './place';
+import { Placetype as _placetype } from './placetype';
+import type { PlacetypeAttributes, PlacetypeCreationAttributes } from './placetype';
 import { Subplace as _subplace } from './subplace';
 import type { SubplaceAttributes, SubplaceCreationAttributes } from './subplace';
 import { Thing as _thing } from './thing';
@@ -23,8 +25,9 @@ export {
   _nonfood as nonfood,
   _object2Subplace as object2Subplace,
   _place as place,
+  _placetype as placetype,
   _subplace as subplace,
-  _thing as Thing,
+  _thing as thing,
   _user as user,
   _alcoholic as alcoholic,
   _nonalcoholic as nonalcoholic,
@@ -39,6 +42,8 @@ export type {
   Object2SubplaceCreationAttributes as object2SubplaceCreationAttributes,
   PlaceAttributes,
   PlaceCreationAttributes,
+  PlacetypeAttributes,
+  PlacetypeCreationAttributes,
   SubplaceAttributes as subplaceAttributes,
   SubplaceCreationAttributes as subplaceCreationAttributes,
   ThingAttributes,
@@ -56,6 +61,7 @@ export function initModels(sequelize: Sequelize) {
   const nonfood = _nonfood.initModel(sequelize);
   const object2Subplace = _object2Subplace.initModel(sequelize);
   const place = _place.initModel(sequelize);
+  const placetype = _placetype.initModel(sequelize);
   const subplace = _subplace.initModel(sequelize);
   const thing = _thing.initModel(sequelize);
   const user = _user.initModel(sequelize);
@@ -66,6 +72,8 @@ export function initModels(sequelize: Sequelize) {
   thing.belongsToMany(subplace, { as: 'subplaceid_subplaces', through: object2Subplace, foreignKey: 'objectid', otherKey: 'subplaceid' });
   subplace.belongsTo(place, { as: 'place', foreignKey: 'placeid' });
   place.hasMany(subplace, { as: 'subplaces', foreignKey: 'placeid' });
+  place.belongsTo(placetype, { as: 'placetype', foreignKey: 'placetypeid'});
+  placetype.hasMany(place, { as: 'places', foreignKey: 'placetypeid'});
   object2Subplace.belongsTo(subplace, { as: 'subplace', foreignKey: 'subplaceid' });
   subplace.hasMany(object2Subplace, { as: 'object2subplaces', foreignKey: 'subplaceid' });
   object2Subplace.belongsTo(thing, { as: 'object', foreignKey: 'objectid' });
@@ -74,6 +82,8 @@ export function initModels(sequelize: Sequelize) {
   user.hasMany(object2Subplace, { as: 'object2subplaces', foreignKey: 'userid' });
   place.belongsTo(user, { as: 'user', foreignKey: 'userid' });
   user.hasMany(place, { as: 'places', foreignKey: 'userid' });
+  placetype.belongsTo(user, { as: 'user', foreignKey: 'userid' });
+  user.hasMany(placetype, { as: 'placetypes', foreignKey: 'userid' });
   subplace.belongsTo(user, { as: 'user', foreignKey: 'userid' });
   user.hasMany(subplace, { as: 'subplaces', foreignKey: 'userid' });
   thing.belongsTo(user, { as: 'user', foreignKey: 'userid' });
@@ -86,6 +96,7 @@ export function initModels(sequelize: Sequelize) {
     nonfood: nonfood,
     object2Subplace: object2Subplace,
     place: place,
+    placetype: placetype,
     subplace: subplace,
     thing: thing,
     user: user,

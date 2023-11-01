@@ -18,7 +18,7 @@ export class PlaceService {
   }
 
   public async createPlace(placeData: CreatePlaceDto): Promise<place> {
-    const findPlace: place = await place.findOne({ where: { name: placeData.name, type: placeData.type } });
+    const findPlace: place = await place.findOne({ where: { name: placeData.name, placetypeid: placeData.placetypeid } });
     if (findPlace) throw new GlobalHttpException(409, `This name ${placeData.name} already exists`);
 
     const createPlaceData: place = await place.create({... placeData});

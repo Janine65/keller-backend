@@ -1,26 +1,24 @@
 import { IsString, IsNotEmpty, IsNumber} from 'class-validator';
 
-export class CreatePlaceDto {
+export class CreatePlacetypeDto {
   @IsString()
   @IsNotEmpty()
   public name: string;
 
-  @IsNumber()
-  @IsNotEmpty()
-  public placetypeid: number;
+  @IsString()
+  public icon: string;
 
   @IsNumber()
   public userid: number;
 }
 
-export class UpdatePlaceDto {
+export class UpdatePlacetypeDto {
   @IsString()
   @IsNotEmpty()
   public name: string;
 
-  @IsNumber()
-  @IsNotEmpty()
-  public placetypeid: number;
+  @IsString()
+  public icon: string;
 
   @IsNumber()
   public userid: number;

@@ -6,14 +6,14 @@ export interface NonalcoholicAttributes {
   name: string;
   createdAt: Date;
   updatedAt: Date;
-  units?: string;
+  unit_weight: string;
   weight?: number;
-  userid?: string;
+  userid?: number;
 }
 
 export type NonalcoholicPk = 'id';
 export type NonalcoholicId = Nonalcoholic[NonalcoholicPk];
-export type NonalcoholicOptionalAttributes = 'weight' | 'units' | 'userid';
+export type NonalcoholicOptionalAttributes = 'weight' | 'userid';
 export type NonalcoholicCreationAttributes = Optional<NonalcoholicAttributes, NonalcoholicOptionalAttributes>;
 
 export class Nonalcoholic extends Model<NonalcoholicAttributes, NonalcoholicCreationAttributes> implements NonalcoholicAttributes {
@@ -21,9 +21,9 @@ export class Nonalcoholic extends Model<NonalcoholicAttributes, NonalcoholicCrea
   name!: string;
   createdAt!: Date;
   updatedAt!: Date;
-  units?: string;
+  unit_weight: string;
   weight?: number;
-  userid?: string;
+  userid?: number;
 
   static initModel(sequelize: Sequelize.Sequelize): typeof Nonalcoholic {
     return Nonalcoholic.init(
@@ -38,9 +38,9 @@ export class Nonalcoholic extends Model<NonalcoholicAttributes, NonalcoholicCrea
           type: DataTypes.TEXT,
           allowNull: false,
         },
-        units: {
+        unit_weight: {
           type: DataTypes.TEXT,
-          allowNull: true,
+          allowNull: false,
         },
         weight: {
           type: DataTypes.DECIMAL(6,3),

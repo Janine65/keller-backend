@@ -9,7 +9,8 @@ export interface ThingAttributes {
   name: string;
   createdAt: Date;
   updatedAt: Date;
-  userid?: string;
+  userid?: number;
+  unit_weight: string;
 }
 
 export type ThingPk = 'id';
@@ -22,7 +23,8 @@ export class Thing extends Model<ThingAttributes, thingCreationAttributes> imple
   name!: string;
   createdAt!: Date;
   updatedAt!: Date;
-  userid?: string;
+  userid?: number;
+  unit_weight: string;
 
   // Thing hasMany object2Subplace via objectid
   object2subplaces!: Object2Subplace[];
@@ -64,6 +66,10 @@ export class Thing extends Model<ThingAttributes, thingCreationAttributes> imple
           primaryKey: true,
         },
         name: {
+          type: DataTypes.TEXT,
+          allowNull: false,
+        },
+        unit_weight: {
           type: DataTypes.TEXT,
           allowNull: false,
         },

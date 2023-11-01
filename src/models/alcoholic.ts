@@ -10,7 +10,8 @@ export interface AlcoholicAttributes {
   region?: string;
   year?: number;
   grapes?: string[];
-  userid?: string;
+  userid?: number;
+  unit_weight: string;
 }
 
 export type AlcoholicPk = 'id';
@@ -27,7 +28,8 @@ export class Alcoholic extends Model<AlcoholicAttributes, AlcoholicCreationAttri
   region?: string;
   year?: number;
   grapes?: string[];
-  userid?: string;
+  userid?: number;
+  unit_weight: string;
 
   static initModel(sequelize: Sequelize.Sequelize): typeof Alcoholic {
     return Alcoholic.init(
@@ -61,6 +63,10 @@ export class Alcoholic extends Model<AlcoholicAttributes, AlcoholicCreationAttri
         userid: {
           type: DataTypes.INTEGER,
           allowNull: true,
+        },
+        unit_weight: {
+          type: DataTypes.STRING,
+          allowNull: false,
         },
         createdAt: '',
         updatedAt: '',

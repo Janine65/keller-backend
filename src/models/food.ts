@@ -6,15 +6,15 @@ export interface FoodAttributes {
   name: string;
   createdAt: Date;
   updatedAt: Date;
-  unit_weight?: string;
+  unit_weight: string;
   vacuumed?: boolean;
   sealed?: boolean;
-  userid?: string;
+  userid?: number;
 }
 
 export type FoodPk = 'id';
 export type FoodId = Food[FoodPk];
-export type FoodOptionalAttributes = 'unit_weight' | 'vacuumed' | 'sealed' | 'userid';
+export type FoodOptionalAttributes = 'vacuumed' | 'sealed' | 'userid';
 export type FoodCreationAttributes = Optional<FoodAttributes, FoodOptionalAttributes>;
 
 export class Food extends Model<FoodAttributes, FoodCreationAttributes> implements FoodAttributes {
@@ -22,10 +22,10 @@ export class Food extends Model<FoodAttributes, FoodCreationAttributes> implemen
   name!: string;
   createdAt!: Date;
   updatedAt!: Date;
-  unit_weight?: string;
+  unit_weight: string;
   vacuumed?: boolean;
   sealed?: boolean;
-  userid?: string;
+  userid?: number;
 
   static initModel(sequelize: Sequelize.Sequelize): typeof Food {
     return Food.init(
@@ -42,7 +42,7 @@ export class Food extends Model<FoodAttributes, FoodCreationAttributes> implemen
         },
         unit_weight: {
           type: DataTypes.TEXT,
-          allowNull: true,
+          allowNull: false,
         },
         vacuumed: {
           type: DataTypes.BOOLEAN,

@@ -2,29 +2,35 @@ import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 import type { Subplace, SubplaceId } from './subplace';
 import type { User, UserId } from './user';
+import { Placetype, PlacetypeId } from './placetype';
 
 export interface PlaceAttributes {
   id?: number;
   name: string;
-  type: PlaceType;
+  placetypeid: number;
   createdAt: Date;
   updatedAt: Date;
-  userid?: string;
+  userid?: number;
 }
 
 export type PlacePk = 'id';
 export type PlaceId = Place[PlacePk];
-export enum PlaceType { 'tiefkuehl', 'kuehl', 'offen'}
 export type PlaceOptionalAttributes = 'id' | 'createdAt' | 'updatedAt' | 'userid';
 export type PlaceCreationAttributes = Optional<PlaceAttributes, PlaceOptionalAttributes>;
 
 export class Place extends Model<PlaceAttributes, PlaceCreationAttributes> implements PlaceAttributes {
   id?: number;
   name!: string;
-  type!: PlaceType;
+  placetypeid!: number;
   createdAt!: Date;
   updatedAt!: Date;
-  userid?: string;
+  userid?: number;
+
+  // place belongsTo placetype via placetypeid
+  placetyüe!: Placetype;
+  getPlacetype!: Sequelize.BelongsToGetAssociationMixin<Placetype>;
+  setPlacetype!: Sequelize.BelongsToSetAssociationMixin<Placetype, PlacetypeId>;
+  createPlacetype!: Sequelize.BelongsToCreateAssociationMixin<Placetype>;
 
   // place hasMany subplace via placeid
   subplaces!: Subplace[];
@@ -57,9 +63,13 @@ export class Place extends Model<PlaceAttributes, PlaceCreationAttributes> imple
           type: DataTypes.TEXT,
           allowNull: false,
         },
-        type: {
-          type: DataTypes.ENUM('tiefkuehl', 'kuehl', 'offen'),
+        placetypeid: {
+          type: DataTypes.INTEGER,
           allowNull: false,
+          references: {
+            model: 'placetype',
+            key: 'id',
+          }
         },
         userid: {
           type: DataTypes.INTEGER,

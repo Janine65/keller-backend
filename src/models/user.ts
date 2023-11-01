@@ -13,7 +13,7 @@ export interface UserAttributes {
   email: string;
   createdAt: Date;
   updatedAt: Date;
-  userid?: string;
+  userid?: number;
 }
 
 export type UserPk = 'id';
@@ -29,7 +29,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   email!: string;
   createdAt!: Date;
   updatedAt!: Date;
-  userid?: string;
+  userid?: number;
 
   // user hasMany object2Subplace via userid
   object2subplaces!: Object2Subplace[];

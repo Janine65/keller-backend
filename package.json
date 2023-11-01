@@ -1,7 +1,7 @@
 {
   "name": "keller-backend",
   "displayName": "Keller Organisator - Backend",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "TypeScript + Sequelize + postgres + Express API Server",
   "author": {
     "name": "Janine Franken",

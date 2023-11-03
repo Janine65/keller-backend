@@ -1,5 +1,4 @@
 import { Container } from 'typedi';
-import { AuthService } from '@services/auth.service';
 import { Thing } from '@/models/thing';
 import { ThingService } from '@/services/things.service';
 import { NextFunction, Request, Response } from 'express';
@@ -22,55 +21,55 @@ export class ThingsController {
     }
   };
 
-  public getAllThing2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
+  public getAllObject2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const findAllThing2SubplacesData: Object2Subplace[] = await this.thing.findAllThing2Subplaces();
+      const findAllAlcoholic2SubplacesData: Object2Subplace[] = await this.thing.findAllObject2Subplaces();
 
-      res.status(200).json({ data: findAllThing2SubplacesData, message: 'findAll' });
+      res.status(200).json({ data: findAllAlcoholic2SubplacesData, message: 'findAll' });
     } catch (error) {
       next(error);
     }
   };
 
-  public getThing2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
+  public getAlcoholic2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const findAllThing2SubplacesData: Object2Subplace[] = await this.thing.findThing2Subplaces(Number(req.query.id));
+      const findAllAlcoholic2SubplacesData: Object2Subplace[] = await this.thing.findAlcoholic2Subplaces(Number(req.query.id));
 
-      res.status(200).json({ data: findAllThing2SubplacesData, message: 'findAll' });
+      res.status(200).json({ data: findAllAlcoholic2SubplacesData, message: 'findAll' });
     } catch (error) {
       next(error);
     }
   };
 
-  public insertThing2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
+  public insertAlcoholic2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const body = req.body;
 
-      const createThing2SubplacesData: Object2Subplace = await this.thing.createThing2Subplace(body['thing'] as Thing, body['obj2sub'] as Object2Subplace);
+      const createAlcoholic2SubplacesData: Object2Subplace = await this.thing.createAlcoholic2Subplace(body['alcoholic'] as Alcoholic, body['obj2sub'] as Object2Subplace);
 
-      res.status(200).json({ data: createThing2SubplacesData, message: 'created' });
+      res.status(200).json({ data: createAlcoholic2SubplacesData, message: 'created' });
     } catch (error) {
       next(error);
     }
   };
 
-  public updateThing2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
+  public updateAlcoholic2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const body = req.body;
 
-      const createThing2SubplacesData: Object2Subplace = await this.thing.updateThing2Subplace(body['thing'] as Thing, body['obj2sub'] as Object2Subplace);
+      const createAlcoholic2SubplacesData: Object2Subplace = await this.thing.updateAlcoholic2Subplace(body['alcoholic'] as Alcoholic, body['obj2sub'] as Object2Subplace);
 
-      res.status(200).json({ data: createThing2SubplacesData, message: 'created' });
+      res.status(200).json({ data: createAlcoholic2SubplacesData, message: 'created' });
     } catch (error) {
       next(error);
     }
   };
 
-  public deleteThing2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
+  public deleteAlcoholic2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const createThing2SubplacesData: boolean = await this.thing.deleteThing2Subplace(Number(req.query.thingid), Number(req.query.subplaceid));
+      const createAlcoholic2SubplacesData: boolean = await this.thing.deleteAlcoholic2Subplace(Number(req.query.alcoholicid), Number(req.query.subplaceid));
 
-      res.status(200).json({ data: createThing2SubplacesData, message: 'created' });
+      res.status(200).json({ data: createAlcoholic2SubplacesData, message: 'created' });
     } catch (error) {
       next(error);
     }
@@ -116,6 +115,50 @@ export class ThingsController {
     }
   };
 
+  public getFood2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const findAllFood2SubplacesData: Object2Subplace[] = await this.thing.findFood2Subplaces(Number(req.query.id));
+
+      res.status(200).json({ data: findAllFood2SubplacesData, message: 'findAll' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public insertFood2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const body = req.body;
+
+      const createFood2SubplacesData: Object2Subplace = await this.thing.createFood2Subplace(body['food'] as Food, body['obj2sub'] as Object2Subplace);
+
+      res.status(200).json({ data: createFood2SubplacesData, message: 'created' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public updateFood2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const body = req.body;
+
+      const createFood2SubplacesData: Object2Subplace = await this.thing.updateFood2Subplace(body['food'] as Food, body['obj2sub'] as Object2Subplace);
+
+      res.status(200).json({ data: createFood2SubplacesData, message: 'created' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public deleteFood2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const createFood2SubplacesData: boolean = await this.thing.deleteFood2Subplace(Number(req.query.foodid), Number(req.query.subplaceid));
+
+      res.status(200).json({ data: createFood2SubplacesData, message: 'created' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
   public getFoods = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const findAllFoodData: Food[] = await this.thing.findAllFood();
@@ -156,6 +199,50 @@ export class ThingsController {
     }
   };
 
+  public getNonalcoholic2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const findAllNonalcoholic2SubplacesData: Object2Subplace[] = await this.thing.findNonalcoholic2Subplaces(Number(req.query.id));
+
+      res.status(200).json({ data: findAllNonalcoholic2SubplacesData, message: 'findAll' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public insertNonalcoholic2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const body = req.body;
+
+      const createNonalcoholic2SubplacesData: Object2Subplace = await this.thing.createNonalcoholic2Subplace(body['nonalcoholic'] as Nonalcoholic, body['obj2sub'] as Object2Subplace);
+
+      res.status(200).json({ data: createNonalcoholic2SubplacesData, message: 'created' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public updateNonalcoholic2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const body = req.body;
+
+      const createNonalcoholic2SubplacesData: Object2Subplace = await this.thing.updateNonalcoholic2Subplace(body['nonalcoholic'] as Nonalcoholic, body['obj2sub'] as Object2Subplace);
+
+      res.status(200).json({ data: createNonalcoholic2SubplacesData, message: 'created' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public deleteNonalcoholic2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const createNonalcoholic2SubplacesData: boolean = await this.thing.deleteNonalcoholic2Subplace(Number(req.query.nonalcoholicid), Number(req.query.subplaceid));
+
+      res.status(200).json({ data: createNonalcoholic2SubplacesData, message: 'created' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
   public getNonalcoholics = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const findAllNonalcoholicData: Nonalcoholic[] = await this.thing.findAllNonalcoholic();
@@ -191,6 +278,50 @@ export class ThingsController {
       const deleteNonalcoholicData: Nonalcoholic = await this.thing.deleteNonalcoholic(req.query.id as string);
 
       res.status(200).json({ data: deleteNonalcoholicData, message: 'deleted' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public getNonfood2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const findAllNonfood2SubplacesData: Object2Subplace[] = await this.thing.findNonfood2Subplaces(Number(req.query.id));
+
+      res.status(200).json({ data: findAllNonfood2SubplacesData, message: 'findAll' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public insertNonfood2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const body = req.body;
+
+      const createNonfood2SubplacesData: Object2Subplace = await this.thing.createNonfood2Subplace(body['nonfood'] as Nonfood, body['obj2sub'] as Object2Subplace);
+
+      res.status(200).json({ data: createNonfood2SubplacesData, message: 'created' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public updateNonfood2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const body = req.body;
+
+      const createNonfood2SubplacesData: Object2Subplace = await this.thing.updateNonfood2Subplace(body['nonfood'] as Nonfood, body['obj2sub'] as Object2Subplace);
+
+      res.status(200).json({ data: createNonfood2SubplacesData, message: 'created' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public deleteNonfood2Subplaces = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const createNonfood2SubplacesData: boolean = await this.thing.deleteNonfood2Subplace(Number(req.query.nonfoodid), Number(req.query.subplaceid));
+
+      res.status(200).json({ data: createNonfood2SubplacesData, message: 'created' });
     } catch (error) {
       next(error);
     }

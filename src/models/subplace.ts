@@ -32,30 +32,7 @@ export class Subplace extends Model<SubplaceAttributes, SubplaceCreationAttribut
   getPlace!: Sequelize.BelongsToGetAssociationMixin<Place>;
   setPlace!: Sequelize.BelongsToSetAssociationMixin<Place, PlaceId>;
   createPlace!: Sequelize.BelongsToCreateAssociationMixin<Place>;
-  // subplace hasMany object2Subplace via subplaceid
-  object2subplaces!: Object2Subplace[];
-  getObject2subplaces!: Sequelize.HasManyGetAssociationsMixin<Object2Subplace>;
-  setObject2subplaces!: Sequelize.HasManySetAssociationsMixin<Object2Subplace, Object2SubplaceId>;
-  addObject2subplace!: Sequelize.HasManyAddAssociationMixin<Object2Subplace, Object2SubplaceId>;
-  addObject2subplaces!: Sequelize.HasManyAddAssociationsMixin<Object2Subplace, Object2SubplaceId>;
-  createObject2subplace!: Sequelize.HasManyCreateAssociationMixin<Object2Subplace>;
-  removeObject2subplace!: Sequelize.HasManyRemoveAssociationMixin<Object2Subplace, Object2SubplaceId>;
-  removeObject2subplaces!: Sequelize.HasManyRemoveAssociationsMixin<Object2Subplace, Object2SubplaceId>;
-  hasObject2subplace!: Sequelize.HasManyHasAssociationMixin<Object2Subplace, Object2SubplaceId>;
-  hasObject2subplaces!: Sequelize.HasManyHasAssociationsMixin<Object2Subplace, Object2SubplaceId>;
-  countObject2subplaces!: Sequelize.HasManyCountAssociationsMixin;
-  // subplace belongsToMany thing via subplaceid and objectid
-  objectid_things!: Thing[];
-  getObjectid_things!: Sequelize.BelongsToManyGetAssociationsMixin<Thing>;
-  setObjectid_things!: Sequelize.BelongsToManySetAssociationsMixin<Thing, ThingId>;
-  addObjectid_thing!: Sequelize.BelongsToManyAddAssociationMixin<Thing, ThingId>;
-  addObjectid_things!: Sequelize.BelongsToManyAddAssociationsMixin<Thing, ThingId>;
-  createObjectid_thing!: Sequelize.BelongsToManyCreateAssociationMixin<Thing>;
-  removeObjectid_thing!: Sequelize.BelongsToManyRemoveAssociationMixin<Thing, ThingId>;
-  removeObjectid_things!: Sequelize.BelongsToManyRemoveAssociationsMixin<Thing, ThingId>;
-  hasObjectid_thing!: Sequelize.BelongsToManyHasAssociationMixin<Thing, ThingId>;
-  hasObjectid_things!: Sequelize.BelongsToManyHasAssociationsMixin<Thing, ThingId>;
-  countObjectid_things!: Sequelize.BelongsToManyCountAssociationsMixin;
+
   // subplace belongsTo user via userid
   user!: User;
   getUser!: Sequelize.BelongsToGetAssociationMixin<User>;

@@ -68,16 +68,22 @@ export function initModels(sequelize: Sequelize) {
   const alcoholic = _alcoholic.initModel(sequelize);
   const nonalcoholic = _nonalcoholic.initModel(sequelize);
 
-  subplace.belongsToMany(thing, { as: 'objectid_things', through: object2Subplace, foreignKey: 'subplaceid', otherKey: 'objectid' });
-  thing.belongsToMany(subplace, { as: 'subplaceid_subplaces', through: object2Subplace, foreignKey: 'objectid', otherKey: 'subplaceid' });
+  subplace.belongsToMany(alcoholic, { as: 'subplace_alcoholic', through: object2Subplace, foreignKey: 'subplaceid', otherKey: 'alcoholicid' });
+  alcoholic.belongsToMany(subplace, { as: 'alcohoicid_subplaces', through: object2Subplace, foreignKey: 'alcoholicid', otherKey: 'subplaceid' });
+  subplace.belongsToMany(food, { as: 'subplace_food', through: object2Subplace, foreignKey: 'subplaceid', otherKey: 'foodid' });
+  food.belongsToMany(subplace, { as: 'foodid_subplaces', through: object2Subplace, foreignKey: 'foodid', otherKey: 'subplaceid' });
+  subplace.belongsToMany(nonalcoholic, { as: 'subplace_nonalcoholic', through: object2Subplace, foreignKey: 'subplaceid', otherKey: 'nonalcoholicid' });
+  nonalcoholic.belongsToMany(subplace, { as: 'nonalcoholicid_subplaces', through: object2Subplace, foreignKey: 'nonalcoholicid', otherKey: 'subplaceid' });
+  subplace.belongsToMany(nonfood, { as: 'subplace_nonfood', through: object2Subplace, foreignKey: 'subplaceid', otherKey: 'nonfoodid' });
+  nonfood.belongsToMany(subplace, { as: 'nonfoodid_subplaces', through: object2Subplace, foreignKey: 'nonfoodid', otherKey: 'subplaceid' });
   subplace.belongsTo(place, { as: 'place', foreignKey: 'placeid' });
   place.hasMany(subplace, { as: 'subplaces', foreignKey: 'placeid' });
   place.belongsTo(placetype, { as: 'placetype', foreignKey: 'placetypeid'});
   placetype.hasMany(place, { as: 'places', foreignKey: 'placetypeid'});
   object2Subplace.belongsTo(subplace, { as: 'subplace', foreignKey: 'subplaceid' });
   subplace.hasMany(object2Subplace, { as: 'object2subplaces', foreignKey: 'subplaceid' });
-  object2Subplace.belongsTo(thing, { as: 'object', foreignKey: 'objectid' });
-  thing.hasMany(object2Subplace, { as: 'object2subplaces', foreignKey: 'objectid' });
+  object2Subplace.belongsTo(thing, { as: 'object', foreignKey: 'id' });
+  thing.hasMany(object2Subplace, { as: 'object2subplaces', foreignKey: 'id' });
   object2Subplace.belongsTo(user, { as: 'user', foreignKey: 'userid' });
   user.hasMany(object2Subplace, { as: 'object2subplaces', foreignKey: 'userid' });
   place.belongsTo(user, { as: 'user', foreignKey: 'userid' });

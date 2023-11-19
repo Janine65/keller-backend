@@ -8,13 +8,14 @@ export interface ThingAttributes {
   createdAt: Date;
   updatedAt: Date;
   userid?: number;
-  unit_weight: string;
+  weight: string;
   thing_type: string;
+  shop: string;
 }
 
 export type ThingPk = 'id';
 export type ThingId = Thing[ThingPk];
-export type ThingOptionalAttributes = 'id' | 'createdAt' | 'updatedAt' | 'userid';
+export type ThingOptionalAttributes = 'shop' | 'id' | 'createdAt' | 'updatedAt' | 'userid';
 export type thingCreationAttributes = Optional<ThingAttributes, ThingOptionalAttributes>;
 
 export class Thing extends Model<ThingAttributes, thingCreationAttributes> implements ThingAttributes {
@@ -23,8 +24,9 @@ export class Thing extends Model<ThingAttributes, thingCreationAttributes> imple
   createdAt!: Date;
   updatedAt!: Date;
   userid?: number;
-  unit_weight: string;
+  weight: string;
   thing_type: string;
+  shop: string;
 
 
   // Thing belongsTo user via userid
@@ -46,7 +48,7 @@ export class Thing extends Model<ThingAttributes, thingCreationAttributes> imple
           type: DataTypes.TEXT,
           allowNull: false,
         },
-        unit_weight: {
+        weight: {
           type: DataTypes.TEXT,
           allowNull: false,
         },
@@ -61,6 +63,10 @@ export class Thing extends Model<ThingAttributes, thingCreationAttributes> imple
         thing_type: {
           type: DataTypes.TEXT,
           allowNull: false
+        },
+        shop: {
+          type: DataTypes.TEXT,
+          allowNull: true,
         },
         createdAt: '',
         updatedAt: '',

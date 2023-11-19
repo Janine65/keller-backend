@@ -7,13 +7,13 @@ const sequelize = new Sequelize.Sequelize(DB_DATABASE, DB_USER, DB_PASSWORD, {
   dialect: 'postgres',
   host: DB_HOST,
   port: Number(DB_PORT),
-  timezone: '+01:00',
+  timezone: 'Europe/Zurich',
   define: {
     charset: 'utf8mb4',
     collate: 'utf8mb4_general_ci',
     underscored: false,
     freezeTableName: true,
-    timestamps: true,
+    timestamps: true
   },
   pool: {
     min: 0,

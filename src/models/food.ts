@@ -8,16 +8,17 @@ export interface FoodAttributes {
   name: string;
   createdAt: Date;
   updatedAt: Date;
-  unit_weight: string;
+  weight: string;
   vacuumed?: boolean;
   sealed?: boolean;
   userid?: number;
   thing_type: string;
+  shop: string;
 }
 
 export type FoodPk = 'id';
 export type FoodId = Food[FoodPk];
-export type FoodOptionalAttributes = 'vacuumed' | 'sealed' | 'userid';
+export type FoodOptionalAttributes = 'shop' | 'vacuumed' | 'sealed' | 'userid';
 export type FoodCreationAttributes = Optional<FoodAttributes, FoodOptionalAttributes>;
 
 export class Food extends Model<FoodAttributes, FoodCreationAttributes> implements FoodAttributes {
@@ -25,11 +26,13 @@ export class Food extends Model<FoodAttributes, FoodCreationAttributes> implemen
   name!: string;
   createdAt!: Date;
   updatedAt!: Date;
-  unit_weight: string;
+  weight: string;
   vacuumed?: boolean;
   sealed?: boolean;
   userid?: number;
   thing_type: string;
+  shop: string;
+
 
   // Food hasMany object2Subplace via id
   object2subplaces!: Object2Subplace[];
@@ -69,7 +72,7 @@ export class Food extends Model<FoodAttributes, FoodCreationAttributes> implemen
           type: DataTypes.TEXT,
           allowNull: false,
         },
-        unit_weight: {
+        weight: {
           type: DataTypes.TEXT,
           allowNull: false,
         },
@@ -91,6 +94,10 @@ export class Food extends Model<FoodAttributes, FoodCreationAttributes> implemen
           type: DataTypes.STRING,
           allowNull: false,
           defaultValue: 'food'
+        },
+        shop: {
+          type: DataTypes.TEXT,
+          allowNull: true,
         },
         createdAt: '',
         updatedAt: '',

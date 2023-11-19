@@ -45,7 +45,7 @@ export class App {
   }
 
   private async connectToDatabase() {
-    DB.sequelize.sync({ force: false, logging: true });
+    DB.sequelize.sync({ force: false, logging: false });
   }
 
   private initializeMiddlewares() {

@@ -13,14 +13,16 @@ export interface AlcoholicAttributes {
   region?: string;
   year?: number;
   grapes?: string[];
+  type?: string;
   userid?: number;
-  unit_weight: string;
+  weight: string;
   thing_type: string;
+  shop: string;
 }
 
 export type AlcoholicPk = 'id';
 export type AlcoholicId = Alcoholic[AlcoholicPk];
-export type AlcoholicOptionalAttributes = 'country' | 'region' | 'year' | 'grapes' | 'userid';
+export type AlcoholicOptionalAttributes = 'shop' | 'country' | 'region' | 'year' | 'grapes' | 'userid';
 export type AlcoholicCreationAttributes = Optional<AlcoholicAttributes, AlcoholicOptionalAttributes>;
 
 export class Alcoholic extends Model<AlcoholicAttributes, AlcoholicCreationAttributes> implements AlcoholicAttributes {
@@ -32,9 +34,11 @@ export class Alcoholic extends Model<AlcoholicAttributes, AlcoholicCreationAttri
   region?: string;
   year?: number;
   grapes?: string[];
+  type?: string;
   userid?: number;
-  unit_weight: string;
+  weight: string;
   thing_type: string;
+  shop: string;
 
 // Alcoholic hasMany object2Subplace via id
 object2subplaces!: Object2Subplace[];
@@ -90,11 +94,15 @@ static initModel(sequelize: Sequelize.Sequelize): typeof Alcoholic {
           type: DataTypes.ARRAY(DataTypes.TEXT),
           allowNull: true,
         },
+        type: {
+          type: DataTypes.TEXT,
+          allowNull: true,
+        },
         userid: {
           type: DataTypes.INTEGER,
           allowNull: true,
         },
-        unit_weight: {
+        weight: {
           type: DataTypes.STRING,
           allowNull: false,
         },
@@ -102,6 +110,10 @@ static initModel(sequelize: Sequelize.Sequelize): typeof Alcoholic {
           type: DataTypes.STRING,
           allowNull: false,
           defaultValue: 'alcoholic'
+        },
+        shop: {
+          type: DataTypes.TEXT,
+          allowNull: true,
         },
         createdAt: '',
         updatedAt: '',

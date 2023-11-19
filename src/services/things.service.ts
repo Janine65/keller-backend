@@ -15,7 +15,7 @@ export class ThingService {
     return allThing;
   }
 
-  public async findThingById(thingId: string): Promise<thing> {
+  public async findThingById(thingId: number): Promise<thing> {
     const findThing: thing = await thing.findByPk(thingId);
     if (!findThing) throw new GlobalHttpException(409, "thing doesn't exist");
 
@@ -25,6 +25,29 @@ export class ThingService {
   public async findAllObject2Subplaces(): Promise<object2Subplace[]> {
     const findOb2Subplace = await Object2Subplace.findAll();
     return findOb2Subplace
+  }
+
+  public async createObject2Subplace(ob2sub: object2Subplace): Promise<object2Subplace> {
+    const findOb2Subplace: object2Subplace = await object2Subplace.create({...ob2sub});
+    return findOb2Subplace
+  }
+
+  public async updateObject2Subplace(ob2sub: object2Subplace): Promise<object2Subplace> {
+    const finddObj2Subplace: object2Subplace = await object2Subplace.findByPk(ob2sub.id);
+    if (!finddObj2Subplace)  throw new GlobalHttpException(409, "object2subject doesn't exist");
+
+    await object2Subplace.update({...ob2sub}, { where: { id: ob2sub.id } });
+
+    const updateOb2Subplace: object2Subplace = await object2Subplace.findByPk(ob2sub.id);
+    return updateOb2Subplace;
+  }
+
+  public async deleteObjectc2Subplace(id: number): Promise<boolean> {
+    const findObject2Subplace: Object2Subplace = await Object2Subplace.findByPk(id)
+    if (!findObject2Subplace)  throw new GlobalHttpException(409, "object2subject doesn't exist");
+    
+    await findObject2Subplace.destroy();
+    return true
   }
 
   public async findAlcoholic2Subplaces(alcoholicid: number): Promise<object2Subplace[]> {
@@ -40,28 +63,12 @@ export class ThingService {
     return findOb2Subplace
   }
 
-  public async updateAlcoholic2Subplace(alcoholicData: alcoholic, ob2sub: object2Subplace): Promise<object2Subplace> {
-    const hasObj2Subplace: boolean = await alcoholicData.hasObject2subplace(ob2sub);
-    if (!hasObj2Subplace)  throw new GlobalHttpException(409, "object2subject doesn't exist");
-
-    const findOb2Subplace: object2Subplace = await alcoholicData.createObject2subplace(ob2sub);
-    return findOb2Subplace
-  }
-
-  public async deleteAlcoholic2Subplace(alcoholicid: number, subplaceid: number): Promise<boolean> {
-    const findObject2Subplace: Object2Subplace = await Object2Subplace.findOne({where: [{ alcoholicid: alcoholicid}, {subplaceid: subplaceid}]})
-    if (!findObject2Subplace)  throw new GlobalHttpException(409, "object2subject doesn't exist");
-    
-    await findObject2Subplace.destroy();
-    return true
-  }
-
   public async findAllAlcoholic(): Promise<alcoholic[]> {
     const allAlcoholic: alcoholic[] = await alcoholic.findAll();
     return allAlcoholic;
   }
 
-  public async findAlcoholicById(alcoholicId: string): Promise<alcoholic> {
+  public async findAlcoholicById(alcoholicId: number): Promise<alcoholic> {
     const findAlcoholic: alcoholic = await alcoholic.findByPk(alcoholicId);
     if (!findAlcoholic) throw new GlobalHttpException(409, "alcoholic doesn't exist");
 
@@ -76,7 +83,7 @@ export class ThingService {
     return createAlcoholicData;
   }
 
-  public async updateAlcoholic(alcoholicId: string, alcoholicData: CreateAlcoholicDto): Promise<alcoholic> {
+  public async updateAlcoholic(alcoholicId: number, alcoholicData: CreateAlcoholicDto): Promise<alcoholic> {
     const findAlcoholic: alcoholic = await alcoholic.findByPk(alcoholicId);
     if (!findAlcoholic) throw new GlobalHttpException(409, "alcoholic doesn't exist");
 
@@ -86,7 +93,7 @@ export class ThingService {
     return updateAlcoholic;
   }
 
-  public async deleteAlcoholic(alcoholicId: string): Promise<alcoholic> {
+  public async deleteAlcoholic(alcoholicId: number): Promise<alcoholic> {
     const findAlcoholic: alcoholic = await alcoholic.findByPk(alcoholicId);
     if (!findAlcoholic) throw new GlobalHttpException(409, "alcoholic doesn't exist");
 
@@ -100,7 +107,7 @@ export class ThingService {
     return allFood;
   }
 
-  public async findFoodById(foodId: string): Promise<food> {
+  public async findFoodById(foodId: number): Promise<food> {
     const findFood: food = await food.findByPk(foodId);
     if (!findFood) throw new GlobalHttpException(409, "food doesn't exist");
 
@@ -120,22 +127,6 @@ export class ThingService {
     return findOb2Subplace
   }
 
-  public async updateFood2Subplace(foodData: food, ob2sub: object2Subplace): Promise<object2Subplace> {
-    const hasObj2Subplace: boolean = await foodData.hasObject2subplace(ob2sub);
-    if (!hasObj2Subplace)  throw new GlobalHttpException(409, "object2subject doesn't exist");
-
-    const findOb2Subplace: object2Subplace = await foodData.createObject2subplace(ob2sub);
-    return findOb2Subplace
-  }
-
-  public async deleteFood2Subplace(foodid: number, subplaceid: number): Promise<boolean> {
-    const findObject2Subplace: Object2Subplace = await Object2Subplace.findOne({where: [{ foodid: foodid}, {subplaceid: subplaceid}]})
-    if (!findObject2Subplace)  throw new GlobalHttpException(409, "object2subject doesn't exist");
-    
-    await findObject2Subplace.destroy();
-    return true
-  }
-
   public async createFood(foodData: CreateFoodDto): Promise<food> {
     const findFood: food = await food.findOne({ where: { name: foodData.name } });
     if (findFood) throw new GlobalHttpException(409, `This name ${foodData.name} already exists`);
@@ -144,7 +135,7 @@ export class ThingService {
     return createFoodData;
   }
 
-  public async updateFood(foodId: string, foodData: CreateFoodDto): Promise<food> {
+  public async updateFood(foodId: number, foodData: CreateFoodDto): Promise<food> {
     const findFood: food = await food.findByPk(foodId);
     if (!findFood) throw new GlobalHttpException(409, "food doesn't exist");
 
@@ -154,7 +145,7 @@ export class ThingService {
     return updateFood;
   }
 
-  public async deleteFood(foodId: string): Promise<food> {
+  public async deleteFood(foodId: number): Promise<food> {
     const findFood: food = await food.findByPk(foodId);
     if (!findFood) throw new GlobalHttpException(409, "food doesn't exist");
 
@@ -168,7 +159,7 @@ export class ThingService {
     return allNonalcoholic;
   }
 
-  public async findNonalcoholicById(nonalcoholicId: string): Promise<nonalcoholic> {
+  public async findNonalcoholicById(nonalcoholicId: number): Promise<nonalcoholic> {
     const findNonalcoholic: nonalcoholic = await nonalcoholic.findByPk(nonalcoholicId);
     if (!findNonalcoholic) throw new GlobalHttpException(409, "nonalcoholic doesn't exist");
 
@@ -188,22 +179,6 @@ export class ThingService {
     return findOb2Subplace
   }
 
-  public async updateNonalcoholic2Subplace(nonalcoholicData: nonalcoholic, ob2sub: object2Subplace): Promise<object2Subplace> {
-    const hasObj2Subplace: boolean = await nonalcoholicData.hasObject2subplace(ob2sub);
-    if (!hasObj2Subplace)  throw new GlobalHttpException(409, "object2subject doesn't exist");
-
-    const findOb2Subplace: object2Subplace = await nonalcoholicData.createObject2subplace(ob2sub);
-    return findOb2Subplace
-  }
-
-  public async deleteNonalcoholic2Subplace(nonalcoholicid: number, subplaceid: number): Promise<boolean> {
-    const findObject2Subplace: Object2Subplace = await Object2Subplace.findOne({where: [{ nonalcoholicid: nonalcoholicid}, {subplaceid: subplaceid}]})
-    if (!findObject2Subplace)  throw new GlobalHttpException(409, "object2subject doesn't exist");
-    
-    await findObject2Subplace.destroy();
-    return true
-  }
-
   public async createNonalcoholic(nonalcoholicData: CreateNonalcoholicDto): Promise<nonalcoholic> {
     const findNonalcoholic: nonalcoholic = await nonalcoholic.findOne({ where: { name: nonalcoholicData.name } });
     if (findNonalcoholic) throw new GlobalHttpException(409, `This name ${nonalcoholicData.name} already exists`);
@@ -212,7 +187,7 @@ export class ThingService {
     return createNonalcoholicData;
   }
 
-  public async updateNonalcoholic(nonalcoholicId: string, nonalcoholicData: CreateNonalcoholicDto): Promise<nonalcoholic> {
+  public async updateNonalcoholic(nonalcoholicId: number, nonalcoholicData: CreateNonalcoholicDto): Promise<nonalcoholic> {
     const findNonalcoholic: nonalcoholic = await nonalcoholic.findByPk(nonalcoholicId);
     if (!findNonalcoholic) throw new GlobalHttpException(409, "nonalcoholic doesn't exist");
 
@@ -222,7 +197,7 @@ export class ThingService {
     return updateNonalcoholic;
   }
 
-  public async deleteNonalcoholic(nonalcoholicId: string): Promise<nonalcoholic> {
+  public async deleteNonalcoholic(nonalcoholicId: number): Promise<nonalcoholic> {
     const findNonalcoholic: nonalcoholic = await nonalcoholic.findByPk(nonalcoholicId);
     if (!findNonalcoholic) throw new GlobalHttpException(409, "nonalcoholic doesn't exist");
 
@@ -236,7 +211,7 @@ export class ThingService {
     return allNonfood;
   }
 
-  public async findNonfoodById(nonfoodId: string): Promise<nonfood> {
+  public async findNonfoodById(nonfoodId: number): Promise<nonfood> {
     const findNonfood: nonfood = await nonfood.findByPk(nonfoodId);
     if (!findNonfood) throw new GlobalHttpException(409, "nonfood doesn't exist");
 
@@ -256,22 +231,6 @@ export class ThingService {
     return findOb2Subplace
   }
 
-  public async updateNonfood2Subplace(nonfoodData: nonfood, ob2sub: object2Subplace): Promise<object2Subplace> {
-    const hasObj2Subplace: boolean = await nonfoodData.hasObject2subplace(ob2sub);
-    if (!hasObj2Subplace)  throw new GlobalHttpException(409, "object2subject doesn't exist");
-
-    const findOb2Subplace: object2Subplace = await nonfoodData.createObject2subplace(ob2sub);
-    return findOb2Subplace
-  }
-
-  public async deleteNonfood2Subplace(nonfoodid: number, subplaceid: number): Promise<boolean> {
-    const findObject2Subplace: Object2Subplace = await Object2Subplace.findOne({where: [{ nonfoodid: nonfoodid}, {subplaceid: subplaceid}]})
-    if (!findObject2Subplace)  throw new GlobalHttpException(409, "object2subject doesn't exist");
-    
-    await findObject2Subplace.destroy();
-    return true
-  }
-
   public async createNonfood(nonfoodData: CreateNonfoodDto): Promise<nonfood> {
     const findNonfood: nonfood = await nonfood.findOne({ where: { name: nonfoodData.name } });
     if (findNonfood) throw new GlobalHttpException(409, `This name ${nonfoodData.name} already exists`);
@@ -280,7 +239,7 @@ export class ThingService {
     return createNonfoodData;
   }
 
-  public async updateNonfood(nonfoodId: string, nonfoodData: CreateNonfoodDto): Promise<nonfood> {
+  public async updateNonfood(nonfoodId: number, nonfoodData: CreateNonfoodDto): Promise<nonfood> {
     const findNonfood: nonfood = await nonfood.findByPk(nonfoodId);
     if (!findNonfood) throw new GlobalHttpException(409, "nonfood doesn't exist");
 
@@ -290,7 +249,7 @@ export class ThingService {
     return updateNonfood;
   }
 
-  public async deleteNonfood(nonfoodId: string): Promise<nonfood> {
+  public async deleteNonfood(nonfoodId: number): Promise<nonfood> {
     const findNonfood: nonfood = await nonfood.findByPk(nonfoodId);
     if (!findNonfood) throw new GlobalHttpException(409, "nonfood doesn't exist");
 

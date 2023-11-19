@@ -7,7 +7,7 @@ export class CreateAlcoholicDto {
   
     @IsString()
     @IsNotEmpty()
-    public unit_weight: string;
+    public weight: string;
   
     @IsString()
     public country: string;
@@ -35,7 +35,7 @@ export class CreateAlcoholicDto {
   
     @IsString()
     @IsNotEmpty()
-    public unit_weight: string;
+    public weight: string;
   
     @IsBoolean()
     public vacuumed: boolean;
@@ -54,7 +54,7 @@ export class CreateAlcoholicDto {
   
     @IsString()
     @IsNotEmpty()
-    public unit_weight: string;
+    public weight: string;
   
     @IsNumber()
     public weight: number;
@@ -70,7 +70,7 @@ export class CreateAlcoholicDto {
   
     @IsString()
     @IsNotEmpty()
-    public unit_weight: string;
+    public weight: string;
   
     @IsNumber()
     public userid: number;

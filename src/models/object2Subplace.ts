@@ -9,6 +9,8 @@ import { Nonfood, NonfoodId } from './nonfood';
 
 export interface Object2SubplaceAttributes {
   id: number;
+  createdAt: Date;
+  updatedAt: Date;
   subplaceid: number;
   alcoholicid?: number;
   foodid?: number;
@@ -17,15 +19,19 @@ export interface Object2SubplaceAttributes {
   weight?: number;
   count?: number;
   userid?: number;
+  shopped_at?: Date;
+  valid_until?: Date;
 }
 
 export type Object2SubplacePk = 'id';
 export type Object2SubplaceId = Object2Subplace[Object2SubplacePk];
-export type Object2SubplaceOptionalAttributes = 'alcoholicid' | 'foodid' | 'nonalcoholicid' | 'nonfoodid' | 'weight' | 'count' | 'userid';
+export type Object2SubplaceOptionalAttributes = 'id' | 'alcoholicid' | 'foodid' | 'nonalcoholicid' | 'nonfoodid' | 'weight' | 'count' | 'userid' | 'shopped_at' | 'valid_until';
 export type Object2SubplaceCreationAttributes = Optional<Object2SubplaceAttributes, Object2SubplaceOptionalAttributes>;
 
 export class Object2Subplace extends Model<Object2SubplaceAttributes, Object2SubplaceCreationAttributes> implements Object2SubplaceAttributes {
   id!: number;
+  createdAt: Date;
+  updatedAt: Date;
   subplaceid!: number;
   alcoholicid?: number;
   foodid?: number;
@@ -34,6 +40,8 @@ export class Object2Subplace extends Model<Object2SubplaceAttributes, Object2Sub
   weight?: number;
   count?: number;
   userid?: number;
+  shopped_at?: Date;
+  valid_until?: Date;
 
   // object2Subplace belongsTo subplace via subplaceid
   subplace!: Subplace;
@@ -69,6 +77,7 @@ export class Object2Subplace extends Model<Object2SubplaceAttributes, Object2Sub
         id: {
           type: DataTypes.INTEGER,
           allowNull: false,
+          autoIncrement: true,
           primaryKey: true
         },
         subplaceid: {
@@ -82,7 +91,7 @@ export class Object2Subplace extends Model<Object2SubplaceAttributes, Object2Sub
         },
         alcoholicid: {
           type: DataTypes.INTEGER,
-          allowNull: false,
+          allowNull: true,
           primaryKey: true,
           references: {
             model: 'alcoholic',
@@ -91,7 +100,7 @@ export class Object2Subplace extends Model<Object2SubplaceAttributes, Object2Sub
         },
         foodid: {
           type: DataTypes.INTEGER,
-          allowNull: false,
+          allowNull: true,
           primaryKey: true,
           references: {
             model: 'food',
@@ -100,7 +109,7 @@ export class Object2Subplace extends Model<Object2SubplaceAttributes, Object2Sub
         },
         nonalcoholicid: {
           type: DataTypes.INTEGER,
-          allowNull: false,
+          allowNull: true,
           primaryKey: true,
           references: {
             model: 'nonalcoholic',
@@ -109,7 +118,7 @@ export class Object2Subplace extends Model<Object2SubplaceAttributes, Object2Sub
         },
         nonfoodid: {
           type: DataTypes.INTEGER,
-          allowNull: false,
+          allowNull: true,
           primaryKey: true,
           references: {
             model: 'nonfood',
@@ -132,6 +141,16 @@ export class Object2Subplace extends Model<Object2SubplaceAttributes, Object2Sub
             key: 'id',
           },
         },
+        shopped_at: {
+          type: DataTypes.DATEONLY,
+          allowNull: true,
+        },
+        valid_until: {
+          type: DataTypes.DATEONLY,
+          allowNull: true,
+        },
+        createdAt: '',
+        updatedAt: '',
       },
       {
         sequelize,

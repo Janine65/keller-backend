@@ -8,14 +8,15 @@ export interface NonfoodAttributes {
   name: string;
   createdAt: Date;
   updatedAt: Date;
-  unit_weight: string;
+  weight: string;
   userid?: number;
   thing_type: string;
+  shop: string;
 }
 
 export type NonfoodPk = 'id';
 export type NonfoodId = Nonfood[NonfoodPk];
-export type NonfoodOptionalAttributes = 'userid';
+export type NonfoodOptionalAttributes = 'shop' | 'userid';
 export type NonfoodCreationAttributes = Optional<NonfoodAttributes, NonfoodOptionalAttributes>;
 
 export class Nonfood extends Model<NonfoodAttributes, NonfoodCreationAttributes> implements NonfoodAttributes {
@@ -23,9 +24,10 @@ export class Nonfood extends Model<NonfoodAttributes, NonfoodCreationAttributes>
   name!: string;
   createdAt!: Date;
   updatedAt!: Date;
-  unit_weight: string;
+  weight: string;
   userid?: number;
   thing_type: string;
+  shop: string;
 
   // Nonfood hasMany object2Subplace via id
   object2subplaces!: Object2Subplace[];
@@ -65,7 +67,7 @@ export class Nonfood extends Model<NonfoodAttributes, NonfoodCreationAttributes>
           type: DataTypes.TEXT,
           allowNull: false,
         },
-        unit_weight: {
+        weight: {
           type: DataTypes.TEXT,
           allowNull: false,
         },
@@ -78,10 +80,14 @@ export class Nonfood extends Model<NonfoodAttributes, NonfoodCreationAttributes>
           allowNull: false,
           defaultValue: 'nonfood'
         },
+        shop: {
+          type: DataTypes.TEXT,
+          allowNull: true,
+        },
         createdAt: '',
         updatedAt: '',
       },
-      {
+  {
         sequelize,
         tableName: 'nonfood',
         schema: 'public',

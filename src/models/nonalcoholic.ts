@@ -8,15 +8,16 @@ export interface NonalcoholicAttributes {
   name: string;
   createdAt: Date;
   updatedAt: Date;
-  unit_weight: string;
-  weight?: number;
+  weight: string;
   userid?: number;
   thing_type: string;
+  shop: string;
+
 }
 
 export type NonalcoholicPk = 'id';
 export type NonalcoholicId = Nonalcoholic[NonalcoholicPk];
-export type NonalcoholicOptionalAttributes = 'weight' | 'userid';
+export type NonalcoholicOptionalAttributes = 'shop' | 'weight' | 'userid';
 export type NonalcoholicCreationAttributes = Optional<NonalcoholicAttributes, NonalcoholicOptionalAttributes>;
 
 export class Nonalcoholic extends Model<NonalcoholicAttributes, NonalcoholicCreationAttributes> implements NonalcoholicAttributes {
@@ -24,10 +25,11 @@ export class Nonalcoholic extends Model<NonalcoholicAttributes, NonalcoholicCrea
   name!: string;
   createdAt!: Date;
   updatedAt!: Date;
-  unit_weight: string;
-  weight?: number;
+  weight: string;
   userid?: number;
   thing_type: string;
+  shop: string;
+
 
 // Nonalcoholic hasMany object2Subplace via id
 object2subplaces!: Object2Subplace[];
@@ -67,13 +69,9 @@ countSubplaceid_subplaces!: Sequelize.BelongsToManyCountAssociationsMixin;
           type: DataTypes.TEXT,
           allowNull: false,
         },
-        unit_weight: {
+        weight: {
           type: DataTypes.TEXT,
           allowNull: false,
-        },
-        weight: {
-          type: DataTypes.DECIMAL(6,3),
-          allowNull: true,
         },
         userid: {
           type: DataTypes.INTEGER,
@@ -83,6 +81,10 @@ countSubplaceid_subplaces!: Sequelize.BelongsToManyCountAssociationsMixin;
           type: DataTypes.STRING,
           allowNull: false,
           defaultValue: 'nonalcoholic'
+        },
+        shop: {
+          type: DataTypes.TEXT,
+          allowNull: true,
         },
         createdAt: '',
         updatedAt: '',

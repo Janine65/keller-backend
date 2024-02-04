@@ -5,19 +5,18 @@
   "description": "TypeScript + Sequelize + postgres + Express API Server",
   "author": {
     "name": "Janine Franken",
-    "email": "janine@outlook.com"
+    "email": "janine@olconet.com"
   },
   "license": "ISC",
   "scripts": {
-    "start": "npm run build && cross-env NODE_ENV=production node dist/server.js",
+    "preinstall": "npx only-allow pnpm",
+    "start": "pnpm run build && cross-env NODE_ENV=production node dist/server.js",
     "dev": "cross-env NODE_ENV=development nodemon",
     "build": "swc src -d dist --source-maps --copy-files",
     "build:tsc": "tsc && tsc-alias",
     "test": "jest --forceExit --detectOpenHandles",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
     "lint:fix": "npm run lint -- --fix",
-    "deploy:prod": "npm run build && pm2 start ecosystem.config.js --only prod",
-    "deploy:dev": "pm2 start ecosystem.config.js --only dev",
     "migration:generate": "sequelize migration:generate --name",
     "migration:run": "sequelize db:migrate"
   },
@@ -76,7 +75,6 @@
     "node-config": "^0.0.2",
     "node-gyp": "^9.1.0",
     "nodemon": "^3.0.1",
-    "pm2": "^5.2.0",
     "prettier": "^2.7.1",
     "sequelize-cli": "^6.4.1",
     "supertest": "^6.2.4",

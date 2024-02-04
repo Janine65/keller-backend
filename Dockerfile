@@ -2,16 +2,16 @@
 FROM guergeiro/pnpm:18-8
 ENV NODE_ENV=production
 
-WORKDIR /usr/src
+WORKDIR /usr/src/keller-app
 COPY ["package.json", "pnpm-lock.yaml", "./"]
 # RUN npm install -g pnpm
 RUN pnpm install --frozen-lockfile
-COPY . .
+COPY ./dist .
 
 EXPOSE 3000
 
-RUN chown -R node /usr/src
+RUN chown -R node /usr/src/keller-app
 USER node
 
 # Cmd script
-CMD ["pnpm", "start"]
+CMD ["node", "server.js"]

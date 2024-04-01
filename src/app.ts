@@ -20,6 +20,13 @@ export class App {
   public port: string | number;
 
   constructor(routes: Routes[]) {
+    logger.info('environment variables:');
+    const envList = Object.entries(process.env).map(([key, value]) => ({ key, value }))
+    envList.forEach(({key, value},i) => {
+      logger.info(key + ': ' + value);
+    });
+    logger.info('');
+
     this.app = express();
     this.env = NODE_ENV || 'development';
     this.port = PORT || 3000;

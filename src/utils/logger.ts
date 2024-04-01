@@ -4,10 +4,12 @@ import winston from 'winston';
 import winstonDaily from 'winston-daily-rotate-file';
 import { env } from 'process'
 
-console.log(env);
-
+let logDir: string = ''
 // logs dir
-const logDir: string = join(__dirname, env.LOG_DIR);
+if (env.LOG_DIR == '')
+  logDir = join(__dirname, 'logs');
+else  
+  logDir = join(__dirname, env.LOG_DIR);
 
 if (!existsSync(logDir)) {
   mkdirSync(logDir);

@@ -11,7 +11,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "start": "pnpm run build && cross-env NODE_ENV=production node dist/server.js",
-    "dev": "cross-env NODE_ENV=development nodemon",
+    "dev": "cross-env NODE_ENV=development nodemon -r .env",
     "postversion": "git push && git push --tags",
     "build": "swc src -d dist --source-maps --copy-files",
     "build:tsc": "tsc && tsc-alias",
@@ -43,6 +43,7 @@
     "sequelize": "^6.21.3",
     "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^4.5.0",
+    "tslib": "^2.6.2",
     "typedi": "^0.10.0",
     "winston": "^3.8.1",
     "winston-daily-rotate-file": "^4.7.1"

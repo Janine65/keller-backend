@@ -2,35 +2,19 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "node-terminal",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "name": "nodemon",
+            "program": "${workspaceFolder}/server.js",
             "request": "launch",
-            "name": "Dev typescript-express-starter",
-            "command": "npm run dev",
-            "cwd": "${workspaceFolder}"
-        },
-        {
-            "type": "node-terminal",
-            "request": "launch",
-            "name": "Start typescript-express-starter",
-            "command": "npm run start"
-        },
-        {
-            "type": "node-terminal",
-            "request": "launch",
-            "name": "Test typescript-express-starter",
-            "command": "npm run test"
-        },
-        {
-            "type": "node-terminal",
-            "request": "launch",
-            "name": "Lint typescript-express-starter",
-            "command": "npm run lint"
-        },
-        {
-            "type": "node-terminal",
-            "request": "launch",
-            "name": "Lint:Fix typescript-express-starter",
-            "command": "npm run lint:fix"
+            "restart": true,
+            "runtimeExecutable": "nodemon",
+            "envFile": "${workspaceFolder}/.env",
+            "env": {"NODE_ENV":"development"},
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
         }
     ]
 }

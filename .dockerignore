@@ -9,6 +9,8 @@
 .huskyrc
 .lintstagedrc.json
 .prettierrc
+.env*
+src/config/prod/*
 
 # test
 jest.config.js

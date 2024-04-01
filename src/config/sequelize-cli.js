@@ -1,7 +1,6 @@
-const { config } = require('dotenv');
-config({ path: `.env.${process.env.NODE_ENV || 'development'}.local` });
-
-const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DATABASE } = process.env;
+export const CREDENTIALS = process.env.CREDENTIALS === 'true';
+export const { NODE_ENV, PORT, SECRET_KEY, LOG_FORMAT, LOG_DIR, ORIGIN } = process.env;
+export const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE } = process.env;
 
 module.exports = {
   username: DB_USER,
@@ -12,4 +11,5 @@ module.exports = {
   dialect: 'postgres',
   migrationStorageTableName: 'sequelize_migrations',
   seederStorageTableName: 'sequelize_seeds',
+  LOG_DIR: LOG_DIR
 };

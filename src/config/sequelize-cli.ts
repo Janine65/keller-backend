@@ -30,7 +30,7 @@ if (process.env.CREDENTIALS !== 'true') {
 
   finalConfig = {...defaultConfig, ...environmentConfig};
 
-  //console.log(AES.encrypt('DimpgP-2024', finalConfig.secret).toString())
+  //console.log(AES.encrypt('DimpgP21', finalConfig.secret).toString())
 
   finalConfig.password = AES.decrypt(finalConfig.password, finalConfig.secret).toString(enc.Utf8);
   finalConfig.dialect = 'postgres';

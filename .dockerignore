@@ -18,3 +18,4 @@ jest.config.js
 # docker
 Dockerfile
 docker-compose*.yml
+/src

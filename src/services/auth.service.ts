@@ -1,7 +1,7 @@
 import { compare, hash } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import { Service } from 'typedi';
-import { SECRET_KEY } from '@config';
+import { SECRET_KEY } from '@/config/sequelize-cli';
 import { AuthenticateUserDto, CreateUserDto } from '@dtos/users.dto';
 import { GlobalHttpException } from '@/exceptions/GlobalHttpException';
 import { DataStoredInToken, TokenData } from '@interfaces/auth.interface';

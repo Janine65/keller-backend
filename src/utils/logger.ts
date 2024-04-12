@@ -2,14 +2,13 @@ import { existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
 import winston from 'winston';
 import winstonDaily from 'winston-daily-rotate-file';
-import { env } from 'process'
+import finalConfig = require('../config/sequelize-cli')
 
-let logDir: string = ''
+let logDir: string = 'logs'
 // logs dir
-if (env.LOG_DIR == '')
-  logDir = join(__dirname, 'logs');
-else  
-  logDir = join(__dirname, env.LOG_DIR);
+if (finalConfig && finalConfig.log_dir && finalConfig.log_dir != '')
+  logDir = finalConfig.log_dir
+logDir = join(__dirname, logDir);
 
 if (!existsSync(logDir)) {
   mkdirSync(logDir);

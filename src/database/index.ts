@@ -1,12 +1,12 @@
 import Sequelize from 'sequelize';
-import { NODE_ENV, DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DATABASE } from '@config';
+import finalConfig from '../config/sequelize-cli';
 import { logger } from '@utils/logger';
 import { initModels } from '@models/init-models';
 
-const sequelize = new Sequelize.Sequelize(DB_DATABASE, DB_USER, DB_PASSWORD, {
+const sequelize = new Sequelize.Sequelize(finalConfig.database, finalConfig.username, finalConfig.password, {
   dialect: 'postgres',
-  host: DB_HOST,
-  port: Number(DB_PORT),
+  host: finalConfig.host,
+  port: finalConfig.port,
   timezone: 'Europe/Zurich',
   define: {
     charset: 'utf8mb4',
@@ -19,7 +19,7 @@ const sequelize = new Sequelize.Sequelize(DB_DATABASE, DB_USER, DB_PASSWORD, {
     min: 0,
     max: 5,
   },
-  logQueryParameters: NODE_ENV === 'development',
+  logQueryParameters: finalConfig.node_env === 'development',
   logging: (query, time) => {
     logger.info(time + 'ms' + ' ' + query);
   },

@@ -1,0 +1,33 @@
+{
+    "development": {
+        "config_id": "development",
+        "app_name": "keller",
+        "app_desc": "Keller Organizer",
+        "node_port": 3000,
+        "host": "localhost",
+        "webhost": "http://localhost:4200",
+        "database": "keller",
+        "username": "postgres",
+        "password": "U2FsdGVkX1+jpmJsOwa5pr5BJr4mvVMVM4gk0mwX14U=",
+        "port": 5439,
+        "dbtye": "postgres",
+        "log_format": "dev",
+        "log_dir": "../logs",
+        "secret": "Keller Organisator",
+        "credentials": true
+        },
+    "production": {
+        "config_id": "production",
+        "node_port": 3000,
+        "dbhost": "olconet",
+        "webhost": "https://keller.olconet.com",
+        "database": "keller",
+        "db_user": "postgres",
+        "db_pwd": "U2FsdGVkX1+3qeiTfXCDUFCMaeTpTYVrneng2B8UxrA=",
+        "port": 5439,
+        "dbtype": "postgres",
+        "log_format": "prod",
+        "log_dir": "logs"
+    }
+    
+}

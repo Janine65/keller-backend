@@ -8,7 +8,7 @@ import hpp from 'hpp';
 import morgan from 'morgan';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
+import finalConfig = require('config/sequelize-cli')
 import { Routes } from '@interfaces/routes.interface';
 import { ErrorMiddleware } from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
@@ -21,15 +21,13 @@ export class App {
 
   constructor(routes: Routes[]) {
     logger.info('environment variables:');
-    const envList = Object.entries(process.env).map(([key, value]) => ({ key, value }))
-    envList.forEach(({key, value},i) => {
-      logger.info(key + ': ' + value);
-    });
+    const confText = JSON.stringify(finalConfig);
+    logger.info(confText);
     logger.info('');
 
     this.app = express();
-    this.env = NODE_ENV || 'development';
-    this.port = PORT || 3000;
+    this.env = finalConfig.node_env || 'development';
+    this.port = finalConfig.node_port || 3000;
 
     this.initializeSwagger();
     this.connectToDatabase();
@@ -56,8 +54,8 @@ export class App {
   }
 
   private initializeMiddlewares() {
-    this.app.use(morgan(LOG_FORMAT, { stream }));
-    this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
+    this.app.use(morgan(finalConfig.log_format, { stream }));
+    this.app.use(cors({ origin: finalConfig.webhost, credentials: finalConfig.credentials }));
     this.app.use(hpp());
     this.app.use(helmet());
     this.app.use(compression());

@@ -5,7 +5,7 @@ WORKDIR /usr/src/keller-app
 COPY ["package.json", "pnpm-lock.yaml", "./"]
 # RUN npm install -g pnpm
 RUN pnpm install --frozen-lockfile
-COPY ./dist ./
+COPY . .
 
 EXPOSE 3000
 
@@ -13,4 +13,4 @@ RUN chown -R node /usr/src/keller-app
 USER node
  
 # Cmd script
-CMD ["node", "server.js"]
+CMD ["node", "dist/server.js"]

@@ -1,21 +1,25 @@
-# compiled output
-.vscode
-/node_modules
-
-# code formatter
-.eslintrc
-.eslintignore
-.editorconfig
-.huskyrc
-.lintstagedrc.json
-.prettierrc
-.env*
-src/config/prod/*
-
-# test
-jest.config.js
-
-# docker
-Dockerfile
-docker-compose*.yml
-/src
+**/.classpath
+**/.dockerignore
+**/.env
+**/.git
+**/.gitignore
+**/.project
+**/.settings
+**/.toolstarget
+**/.vs
+**/.vscode
+**/src
+**/*.*proj.user
+**/*.dbmdl
+**/*.jfm
+**/charts
+**/docker-compose*
+**/compose*
+**/Dockerfile*
+**/node_modules
+**/npm-debug.log
+**/obj
+**/secrets.dev.yaml
+**/values.dev.yaml
+LICENSE
+README.md

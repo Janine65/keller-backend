@@ -1,17 +1,18 @@
 import { compare, hash } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import { Service } from 'typedi';
-import { SECRET_KEY } from '@/config/sequelize-cli';
 import { AuthenticateUserDto, CreateUserDto } from '@dtos/users.dto';
 import { GlobalHttpException } from '@/exceptions/GlobalHttpException';
 import { DataStoredInToken, TokenData } from '@interfaces/auth.interface';
 import { User } from '@models/user';
 
+import finalConfig = require('../config/sequelize-cli')
+
 const createToken = (user: User): TokenData => {
   const dataStoredInToken: DataStoredInToken = { id: user.id };
   const expiresIn: number = 60 * 60;
 
-  return { expiresIn, token: sign(dataStoredInToken, SECRET_KEY, { expiresIn }) };
+  return { expiresIn, token: sign(dataStoredInToken, finalConfig.secret, { expiresIn }) };
 };
 
 const createCookie = (tokenData: TokenData): string => {

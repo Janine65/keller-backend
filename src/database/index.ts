@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-import finalConfig from '../config/sequelize-cli';
+import finalConfig = require('../config/sequelize-cli');
 import { logger } from '@utils/logger';
 import { initModels } from '@models/init-models';
 
@@ -8,6 +8,7 @@ const sequelize = new Sequelize.Sequelize(finalConfig.database, finalConfig.user
   host: finalConfig.host,
   port: finalConfig.port,
   timezone: 'Europe/Zurich',
+  ssl: true,
   define: {
     charset: 'utf8mb4',
     collate: 'utf8mb4_general_ci',

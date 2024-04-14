@@ -10,11 +10,23 @@
             "restart": true,
             "runtimeExecutable": "nodemon",
             "envFile": "${workspaceFolder}/.env",
-            "env": {"NODE_ENV":"development"},
+            "env": {
+                "NODE_ENV": "development"
+            },
             "skipFiles": [
                 "<node_internals>/**"
             ],
             "type": "node"
+        },
+        {
+            "name": "Docker Node.js Launch",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "platform": "node",
+            "containerName": "kellerbackend",
+            "removeContainerAfterDebug": true
+
         }
     ]
 }

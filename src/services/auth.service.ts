@@ -1,4 +1,4 @@
-import { compare, hash } from 'bcrypt';
+import { compare, compareSync, hash } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import { Service } from 'typedi';
 import { AuthenticateUserDto, CreateUserDto } from '@dtos/users.dto';
@@ -34,7 +34,7 @@ export class AuthService {
     const findUser: User = await User.findOne({ where: { login: userData.login } });
     if (!findUser) throw new GlobalHttpException(409, `This login ${userData.login} was not found`);
 
-    const isPasswordMatching: boolean = await compare(userData.password, findUser.password);
+    const isPasswordMatching: boolean = compareSync(userData.password, findUser.password);
     if (!isPasswordMatching) throw new GlobalHttpException(409, 'Password not matching');
 
     const retVal = await findUser.update('updatedAt', new Date());

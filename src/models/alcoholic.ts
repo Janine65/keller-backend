@@ -5,10 +5,10 @@ import { Subplace, SubplaceId } from './subplace';
 import { STRING } from 'sequelize';
 
 export interface AlcoholicAttributes {
-  id: number;
+  id?: number;
   name: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
   country?: string;
   region?: string;
   year?: number;
@@ -26,19 +26,19 @@ export type AlcoholicOptionalAttributes = 'shop' | 'country' | 'region' | 'year'
 export type AlcoholicCreationAttributes = Optional<AlcoholicAttributes, AlcoholicOptionalAttributes>;
 
 export class Alcoholic extends Model<AlcoholicAttributes, AlcoholicCreationAttributes> implements AlcoholicAttributes {
-  id!: number;
-  name!: string;
-  createdAt!: Date;
-  updatedAt!: Date;
-  country?: string;
-  region?: string;
-  year?: number;
-  grapes?: string[];
-  type?: string;
-  userid?: number;
-  weight: string;
-  thing_type: string;
-  shop: string;
+  declare id?: number;
+  declare name: string;
+  declare createdAt?: Date;
+  declare updatedAt?: Date;
+  declare country?: string;
+  declare region?: string;
+  declare year?: number;
+  declare grapes?: string[];
+  declare type: string;
+  declare userid?: number;
+  declare weight: string;
+  declare thing_type: string;
+  declare shop: string;
 
 // Alcoholic hasMany object2Subplace via id
 object2subplaces!: Object2Subplace[];

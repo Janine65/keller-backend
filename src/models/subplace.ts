@@ -6,10 +6,10 @@ import type { Thing, ThingId } from './thing';
 import type { User, UserId } from './user';
 
 export interface SubplaceAttributes {
-  id: number;
+  id?: number;
   name: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
   placeid: number;
   userid?: number;
 }
@@ -20,12 +20,12 @@ export type SubplaceOptionalAttributes = 'id' | 'createdAt' | 'updatedAt' | 'use
 export type SubplaceCreationAttributes = Optional<SubplaceAttributes, SubplaceOptionalAttributes>;
 
 export class Subplace extends Model<SubplaceAttributes, SubplaceCreationAttributes> implements SubplaceAttributes {
-  id!: number;
-  name!: string;
-  createdAt!: Date;
-  updatedAt!: Date;
-  placeid!: number;
-  userid?: number;
+  declare id?: number;
+  declare name: string;
+  declare createdAt?: Date;
+  declare updatedAt?: Date;
+  declare placeid: number;
+  declare userid?: number;
 
   // subplace belongsTo place via placeid
   place!: Place;

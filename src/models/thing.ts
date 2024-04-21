@@ -3,14 +3,14 @@ import { DataTypes, Model, Optional } from 'sequelize';
 import type { User, UserId } from './user';
 
 export interface ThingAttributes {
-  id: number;
+  id?: number;
   name: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
   userid?: number;
-  weight: string;
+  weight?: string;
   thing_type: string;
-  shop: string;
+  shop?: string;
 }
 
 export type ThingPk = 'id';
@@ -19,14 +19,14 @@ export type ThingOptionalAttributes = 'shop' | 'id' | 'createdAt' | 'updatedAt' 
 export type thingCreationAttributes = Optional<ThingAttributes, ThingOptionalAttributes>;
 
 export class Thing extends Model<ThingAttributes, thingCreationAttributes> implements ThingAttributes {
-  id!: number;
-  name!: string;
-  createdAt!: Date;
-  updatedAt!: Date;
-  userid?: number;
-  weight: string;
-  thing_type: string;
-  shop: string;
+  declare id?: number;
+  declare name: string;
+  declare createdAt?: Date;
+  declare updatedAt?: Date;
+  declare userid?: number;
+  declare weight?: string;
+  declare thing_type: string;
+  declare shop?: string;
 
 
   // Thing belongsTo user via userid

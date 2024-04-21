@@ -8,8 +8,8 @@ export interface PlaceAttributes {
   id?: number;
   name: string;
   placetypeid: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
   userid?: number;
 }
 
@@ -19,12 +19,12 @@ export type PlaceOptionalAttributes = 'id' | 'createdAt' | 'updatedAt' | 'userid
 export type PlaceCreationAttributes = Optional<PlaceAttributes, PlaceOptionalAttributes>;
 
 export class Place extends Model<PlaceAttributes, PlaceCreationAttributes> implements PlaceAttributes {
-  id?: number;
-  name!: string;
-  placetypeid!: number;
-  createdAt!: Date;
-  updatedAt!: Date;
-  userid?: number;
+  declare id?: number;
+  declare name: string;
+  declare placetypeid: number;
+  declare createdAt?: Date;
+  declare updatedAt?: Date;
+  declare userid?: number;
 
   // place belongsTo placetype via placetypeid
   placetyüe!: Placetype;

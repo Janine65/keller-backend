@@ -4,14 +4,14 @@ import { Object2Subplace, Object2SubplaceId } from './object2Subplace';
 import { Subplace, SubplaceId } from './subplace';
 
 export interface NonalcoholicAttributes {
-  id: number;
+  id?: number;
   name: string;
-  createdAt: Date;
-  updatedAt: Date;
-  weight: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  weight?: string;
   userid?: number;
   thing_type: string;
-  shop: string;
+  shop?: string;
 
 }
 
@@ -21,14 +21,14 @@ export type NonalcoholicOptionalAttributes = 'shop' | 'weight' | 'userid';
 export type NonalcoholicCreationAttributes = Optional<NonalcoholicAttributes, NonalcoholicOptionalAttributes>;
 
 export class Nonalcoholic extends Model<NonalcoholicAttributes, NonalcoholicCreationAttributes> implements NonalcoholicAttributes {
-  id!: number;
-  name!: string;
-  createdAt!: Date;
-  updatedAt!: Date;
-  weight: string;
-  userid?: number;
-  thing_type: string;
-  shop: string;
+  declare id?: number;
+  declare name: string;
+  declare createdAt?: Date;
+  declare updatedAt?: Date;
+  declare weight?: string;
+  declare userid?: number;
+  declare thing_type: string;
+  declare shop?: string;
 
 
 // Nonalcoholic hasMany object2Subplace via id

@@ -7,8 +7,8 @@ export interface PlacetypeAttributes {
   id?: number;
   name: string;
   icon: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
   userid?: number;
 }
 
@@ -18,12 +18,12 @@ export type PlacetypeOptionalAttributes = 'id' | 'createdAt' | 'updatedAt' | 'ic
 export type PlacetypeCreationAttributes = Optional<PlacetypeAttributes, PlacetypeOptionalAttributes>;
 
 export class Placetype extends Model<PlacetypeAttributes, PlacetypeCreationAttributes> implements PlacetypeAttributes {
-  id?: number;
-  name!: string;
-  icon!: string;
-  createdAt!: Date;
-  updatedAt!: Date;
-  userid?: number;
+  declare id?: number;
+  declare name: string;
+  declare icon: string;
+  declare createdAt?: Date;
+  declare updatedAt?: Date;
+  declare userid?: number;
 
   // placetype hasMany place via placeid
   places!: Place[];

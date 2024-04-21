@@ -6,13 +6,13 @@ import type { Subplace, SubplaceId } from './subplace';
 import type { Thing, ThingId } from './thing';
 
 export interface UserAttributes {
-  id: number;
+  id?: number;
   login: string;
   password: string;
   name: string;
   email: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
   userid?: number;
 }
 
@@ -22,14 +22,14 @@ export type UserOptionalAttributes = 'userid';
 export type UserCreationAttributes = Optional<UserAttributes, UserOptionalAttributes>;
 
 export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
-  id!: number;
-  login!: string;
-  password!: string;
-  name!: string;
-  email!: string;
-  createdAt!: Date;
-  updatedAt!: Date;
-  userid?: number;
+  declare id?: number;
+  declare login: string;
+  declare password: string;
+  declare name: string;
+  declare email: string;
+  declare createdAt?: Date;
+  declare updatedAt?: Date;
+  declare userid?: number;
 
   // user hasMany object2Subplace via userid
   object2subplaces!: Object2Subplace[];

@@ -34,9 +34,10 @@ export class AuthService {
     const findUser: User = await User.findOne({ where: { login: userData.login } });
     if (!findUser) throw new GlobalHttpException(409, `This login ${userData.login} was not found`);
 
+    //const hashedPassword = await hash(userData.password, 10);
+    //console.log(userData.password, findUser.password, hashedPassword);
     const isPasswordMatching: boolean = compareSync(userData.password, findUser.password);
     if (!isPasswordMatching) throw new GlobalHttpException(409, 'Password not matching');
-
     const retVal = await findUser.update('updatedAt', new Date());
     const tokenData = createToken(findUser);
     const cookie = createCookie(tokenData);

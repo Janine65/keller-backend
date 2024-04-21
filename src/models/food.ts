@@ -4,16 +4,16 @@ import { Object2Subplace, Object2SubplaceId } from './object2Subplace';
 import { Subplace, SubplaceId } from './subplace';
 
 export interface FoodAttributes {
-  id: number;
+  id?: number;
   name: string;
-  createdAt: Date;
-  updatedAt: Date;
-  weight: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  weight?: string;
   vacuumed?: boolean;
   sealed?: boolean;
   userid?: number;
   thing_type: string;
-  shop: string;
+  shop?: string;
 }
 
 export type FoodPk = 'id';
@@ -22,16 +22,16 @@ export type FoodOptionalAttributes = 'shop' | 'vacuumed' | 'sealed' | 'userid';
 export type FoodCreationAttributes = Optional<FoodAttributes, FoodOptionalAttributes>;
 
 export class Food extends Model<FoodAttributes, FoodCreationAttributes> implements FoodAttributes {
-  id!: number;
-  name!: string;
-  createdAt!: Date;
-  updatedAt!: Date;
-  weight: string;
-  vacuumed?: boolean;
-  sealed?: boolean;
-  userid?: number;
-  thing_type: string;
-  shop: string;
+  declare id?: number;
+  declare name: string;
+  declare createdAt?: Date;
+  declare updatedAt?: Date;
+  declare weight?: string;
+  declare vacuumed?: boolean;
+  declare sealed?: boolean;
+  declare userid?: number;
+  declare thing_type: string;
+  declare shop?: string;
 
 
   // Food hasMany object2Subplace via id

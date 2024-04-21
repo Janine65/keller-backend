@@ -8,9 +8,9 @@ import { Nonalcoholic, NonalcoholicId } from './nonalcoholic';
 import { Nonfood, NonfoodId } from './nonfood';
 
 export interface Object2SubplaceAttributes {
-  id: number;
-  createdAt: Date;
-  updatedAt: Date;
+  id?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
   subplaceid: number;
   alcoholicid?: number;
   foodid?: number;
@@ -29,19 +29,19 @@ export type Object2SubplaceOptionalAttributes = 'id' | 'alcoholicid' | 'foodid' 
 export type Object2SubplaceCreationAttributes = Optional<Object2SubplaceAttributes, Object2SubplaceOptionalAttributes>;
 
 export class Object2Subplace extends Model<Object2SubplaceAttributes, Object2SubplaceCreationAttributes> implements Object2SubplaceAttributes {
-  id!: number;
-  createdAt: Date;
-  updatedAt: Date;
-  subplaceid!: number;
-  alcoholicid?: number;
-  foodid?: number;
-  nonalcoholicid?: number;
-  nonfoodid?: number;
-  weight?: number;
-  count?: number;
-  userid?: number;
-  shopped_at?: Date;
-  valid_until?: Date;
+  declare id?: number;
+  declare createdAt?: Date;
+  declare updatedAt?: Date;
+  declare subplaceid: number;
+  declare alcoholicid?: number;
+  declare foodid?: number;
+  declare nonalcoholicid?: number;
+  declare nonfoodid?: number;
+  declare weight?: number;
+  declare count?: number;
+  declare userid?: number;
+  declare shopped_at?: Date;
+  declare valid_until?: Date;
 
   // object2Subplace belongsTo subplace via subplaceid
   subplace!: Subplace;

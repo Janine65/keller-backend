@@ -4,14 +4,14 @@ import { Object2Subplace, Object2SubplaceId } from './object2Subplace';
 import { Subplace, SubplaceId } from './subplace';
 
 export interface NonfoodAttributes {
-  id: number;
+  id?: number;
   name: string;
-  createdAt: Date;
-  updatedAt: Date;
-  weight: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  weight?: string;
   userid?: number;
   thing_type: string;
-  shop: string;
+  shop?: string;
 }
 
 export type NonfoodPk = 'id';
@@ -20,14 +20,14 @@ export type NonfoodOptionalAttributes = 'shop' | 'userid';
 export type NonfoodCreationAttributes = Optional<NonfoodAttributes, NonfoodOptionalAttributes>;
 
 export class Nonfood extends Model<NonfoodAttributes, NonfoodCreationAttributes> implements NonfoodAttributes {
-  id!: number;
-  name!: string;
-  createdAt!: Date;
-  updatedAt!: Date;
-  weight: string;
-  userid?: number;
-  thing_type: string;
-  shop: string;
+  declare id?: number;
+  declare name: string;
+  declare createdAt?: Date;
+  declare updatedAt?: Date;
+  declare weight?: string;
+  declare userid?: number;
+  declare thing_type: string;
+  declare shop?: string;
 
   // Nonfood hasMany object2Subplace via id
   object2subplaces!: Object2Subplace[];

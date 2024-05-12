@@ -9,93 +9,96 @@ import morgan from 'morgan';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import finalConfig = require('./config/sequelize-cli')
-import { Routes } from '@interfaces/routes.interface';
 import { ErrorMiddleware } from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
 import { DB } from './database';
+import { ValidateEnv } from '@utils/validateEnv';
+import { version } from '../package.json'
 
-export class App {
-  public app: express.Application;
-  public env: string;
-  public port: string | number;
+import authRouter from '@routes/auth.route';
+import userRouter from '@routes/users.route';
+import generalRouter from '@routes/general.route';
+import kellerRouter from '@routes/keller.route';
 
-  constructor(routes: Routes[]) {
-    logger.info('environment variables:');
-    const confText = JSON.stringify(finalConfig);
-    logger.info(confText);
-    logger.info('');
+ValidateEnv();
 
-    this.app = express();
-    this.env = finalConfig.node_env || 'development';
-    this.port = finalConfig.node_port || 3000;
+logger.info('environment variables:');
+const confText = JSON.stringify(finalConfig);
+logger.info(confText);
+logger.info('');
 
-    this.initializeSwagger();
-    this.connectToDatabase();
-    this.initializeMiddlewares();
-    this.initializeRoutes(routes);
-    this.initializeErrorHandling();
+const app: express.Application = express();
+const env: string = finalConfig.node_env || 'development';
+const port: string | number = finalConfig.node_port || 3000;
+
+const options = {
+  swaggerDefinition: {
+    info: {
+      title: 'Keller Application',
+      version: '1.0.0',
+      description: 'REST API documentation generated with swagger JSDoc',
+    },
+    basePath: '/',
+    securityDefinitions: {
+      bearerAuth: {
+          type: 'apiKey',
+          name: 'Authorization',
+          scheme: 'bearer',
+          in: 'header'
+      }
   }
+},
+  apis: ['**/*route.ts'],
+};
 
-  public listen() {
-    this.app.listen(this.port, () => {
-      logger.info(`=================================`);
-      logger.info(`======= ENV: ${this.env} =======`);
-      logger.info(`🚀 App listening on the port ${this.port}`);
-      logger.info(`=================================`);
-    });
-  }
+const specs = swaggerJSDoc(options);
+app.use('/api-docs', function(req, res, next){
+  specs["host"] = req.get('host');
+  specs["info"]["version"] = version;
+  req.swaggerDoc = specs;
+  next();
+}, swaggerUi.serve, swaggerUi.setup(specs));
 
-  public getServer() {
-    return this.app;
-  }
+DB.sequelize.sync({ force: false, logging: false });
 
-  private async connectToDatabase() {
-    DB.sequelize.sync({ force: false, logging: false });
-  }
+app.use(morgan(finalConfig.log_format, { stream }));
+app.use(cors({ origin: finalConfig.webhost, credentials: finalConfig.credentials }));
+app.use(hpp());
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: [`'self'`],
+      styleSrc: [`'self'`, `'unsafe-inline'`],
+      imgSrc: [`'self'`, 'data:', 'validator.swagger.io'],
+      scriptSrc: [`'self'`, `https: 'unsafe-inline'`],
+    },
+  },
+}));
+app.use(compression());
+app.use(express.json({ limit: 52428800 }));
+app.use(express.urlencoded({ extended: true, limit: 52428800 }));
+app.use(cookieParser());
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Access-Control-Allow-Headers,Cookies,Access-Control-Allow-Methods,Access-Control-Allow-Origin, Origin, X-Requested-With, Content-Type, Authorization, Accept',
+  );
+  next();
+});
 
-  private initializeMiddlewares() {
-    this.app.use(morgan(finalConfig.log_format, { stream }));
-    this.app.use(cors({ origin: finalConfig.webhost, credentials: finalConfig.credentials }));
-    this.app.use(hpp());
-    this.app.use(helmet());
-    this.app.use(compression());
-    this.app.use(express.json({ limit: 52428800 }));
-    this.app.use(express.urlencoded({ extended: true, limit: 52428800 }));
-    this.app.use(cookieParser());
-    this.app.use(function (req, res, next) {
-      res.setHeader('Access-Control-Allow-Credentials', 'true');
-      res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
-      res.setHeader(
-        'Access-Control-Allow-Headers',
-        'Access-Control-Allow-Headers,Cookies,Access-Control-Allow-Methods,Access-Control-Allow-Origin, Origin, X-Requested-With, Content-Type, Authorization, Accept',
-      );
-      next();
-    });
-  }
+app.use('/', authRouter);
+app.use('/users/', userRouter);
+app.use('/', generalRouter);
+app.use('/basedata/', kellerRouter);
 
-  private initializeRoutes(routes: Routes[]) {
-    routes.forEach(route => {
-      this.app.use('/', route.router);
-    });
-  }
+app.use(ErrorMiddleware);  
 
-  private initializeSwagger() {
-    const options = {
-      swaggerDefinition: {
-        info: {
-          title: 'REST API',
-          version: '1.0.0',
-          description: 'Example docs',
-        },
-      },
-      apis: ['swagger.yaml'],
-    };
+app.listen(port, () => {
+  logger.info(`=================================`);
+  logger.info(`======= ENV: ${env} =======`);
+  logger.info(`🚀 App listening on the port ${port}`);
+  logger.info(`=================================`);
+});
 
-    const specs = swaggerJSDoc(options);
-    this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(specs));
-  }
-
-  private initializeErrorHandling() {
-    this.app.use(ErrorMiddleware);
-  }
-}

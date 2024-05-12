@@ -13,4 +13,4 @@ RUN chown -R node /usr/src/app
 USER node
 
 # Cmd script
-CMD ["node", "server.js"]
+CMD ["node", "app.js"]

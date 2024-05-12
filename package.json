@@ -1,7 +1,7 @@
 {
   "name": "keller-backend",
   "displayName": "Keller Organisator - Backend",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "TypeScript + Sequelize + postgres + Express API Server",
   "author": {
     "name": "Janine Franken",
@@ -10,7 +10,7 @@
   "license": "ISC",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "start": "pnpm run build && cross-env NODE_ENV=production node dist/server.js",
+    "start": "pnpm run build && cross-env NODE_ENV=production node dist/app.js",
     "dev": "cross-env NODE_ENV=development nodemon -r .env",
     "postversion": "git push && git push --tags",
     "build": "swc src -d dist --source-maps --copy-files",
@@ -43,8 +43,8 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
     "sequelize": "^6.21.3",
-    "swagger-jsdoc": "^6.2.1",
-    "swagger-ui-express": "^4.5.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.3",
     "tslib": "^2.6.2",
     "typedi": "^0.10.0",
     "winston-daily-rotate-file": "^4.7.1"

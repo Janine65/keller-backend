@@ -1,6 +1,7 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 import type { User, UserId } from './user';
+import { string } from 'buffer';
 
 export interface ThingAttributes {
   id?: number;
@@ -11,11 +12,12 @@ export interface ThingAttributes {
   weight?: string;
   thing_type: string;
   shop?: string;
+  photo?: string;
 }
 
 export type ThingPk = 'id';
 export type ThingId = Thing[ThingPk];
-export type ThingOptionalAttributes = 'shop' | 'id' | 'createdAt' | 'updatedAt' | 'userid';
+export type ThingOptionalAttributes = 'shop' | 'photo' | 'id' | 'createdAt' | 'updatedAt' | 'userid';
 export type thingCreationAttributes = Optional<ThingAttributes, ThingOptionalAttributes>;
 
 export class Thing extends Model<ThingAttributes, thingCreationAttributes> implements ThingAttributes {
@@ -27,6 +29,7 @@ export class Thing extends Model<ThingAttributes, thingCreationAttributes> imple
   declare weight?: string;
   declare thing_type: string;
   declare shop?: string;
+  declare photo?: string;
 
 
   // Thing belongsTo user via userid
@@ -67,6 +70,10 @@ export class Thing extends Model<ThingAttributes, thingCreationAttributes> imple
         shop: {
           type: DataTypes.TEXT,
           allowNull: true,
+        },
+        photo: {
+          type: DataTypes.STRING,
+          allowNull: true
         },
         createdAt: '',
         updatedAt: '',

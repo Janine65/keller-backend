@@ -13,4 +13,4 @@ RUN chown -R node /usr/src/keller-app
 USER node
  
 # Cmd script
-CMD ["node", "dist/server.js"]
+CMD ["node", "dist/app.js"]

@@ -45,6 +45,15 @@ export class AuthService {
     return { cookie, findUser };
   }
 
+  public async refreshToken(findUser: User) : Promise<{ cookie: string; findUser: User }> {
+
+    const tokenData = createToken(findUser);
+    const cookie = createCookie(tokenData);
+
+    return { cookie, findUser };
+
+  }
+
   public async logout(userData: User): Promise<User> {
     const findUser: User = await User.findOne({ where: { login: userData.login, password: userData.password } });
     if (!findUser) throw new GlobalHttpException(409, "User doesn't exist");

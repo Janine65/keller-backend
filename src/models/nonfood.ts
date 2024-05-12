@@ -12,6 +12,7 @@ export interface NonfoodAttributes {
   userid?: number;
   thing_type: string;
   shop?: string;
+  photo?: string;
 }
 
 export type NonfoodPk = 'id';
@@ -28,6 +29,7 @@ export class Nonfood extends Model<NonfoodAttributes, NonfoodCreationAttributes>
   declare userid?: number;
   declare thing_type: string;
   declare shop?: string;
+  declare photo?: string;
 
   // Nonfood hasMany object2Subplace via id
   object2subplaces!: Object2Subplace[];
@@ -83,6 +85,10 @@ export class Nonfood extends Model<NonfoodAttributes, NonfoodCreationAttributes>
         shop: {
           type: DataTypes.TEXT,
           allowNull: true,
+        },
+        photo: {
+          type: DataTypes.STRING,
+          allowNull: true
         },
         createdAt: '',
         updatedAt: '',

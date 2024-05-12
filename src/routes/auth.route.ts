@@ -5,17 +5,60 @@ import { Routes } from '@interfaces/routes.interface';
 import { AuthMiddleware } from '@middlewares/auth.middleware';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
 
-export class AuthRoute implements Routes {
-  public router = Router();
-  public auth = new AuthController();
+const authRouter: Router = Router();
+const auth = new AuthController();
 
-  constructor() {
-    this.initializeRoutes();
-  }
+/**
+ * @swagger
+ * /signup:
+ *    post:
+ *      tags: 
+ *        - authentication
+ *      description: Signup a new User
+ */
+authRouter.post('/signup', ValidationMiddleware(CreateUserDto), auth.signUp);
+/**
+ * @swagger
+ * /login:
+ *    post:
+ *      tags: 
+ *        - authentication
+ *      description: Login an existing User
+ *      parameters:
+ *       - $ref: '#/definitions/authuser'
+ *      responses:
+ *       200:
+ *         description: login
+ *         schema:
+ *           type: object
+ *           $ref: '#/definitions/users'
+ */
+authRouter.post('/login', ValidationMiddleware(AuthenticateUserDto), auth.logIn);
+/**
+ * @swagger
+ * /refreshToken:
+ *    post:
+ *      tags: 
+ *        - authentication
+ *      description: refresh the Token
+ *      parameters:
+ *       - $ref: '#/definitions/users'
+ *      responses:
+ *       200:
+ *         description: login
+ *         schema:
+ *           type: object
+ *           $ref: '#/definitions/users'
+ */
+authRouter.post('/refreshToken', AuthMiddleware, auth.refreshToken);
+/**
+ * @swagger
+ * /logout:
+ *    post:
+ *      tags: 
+ *        - authentication
+ *      description: Logout
+ */
+authRouter.post('/logout', AuthMiddleware, auth.logOut);
 
-  private initializeRoutes() {
-    this.router.post('/signup', ValidationMiddleware(CreateUserDto), this.auth.signUp);
-    this.router.post('/login', ValidationMiddleware(AuthenticateUserDto), this.auth.logIn);
-    this.router.post('/logout', AuthMiddleware, this.auth.logOut);
-  }
-}
+export default authRouter

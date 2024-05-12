@@ -18,6 +18,8 @@ export interface AlcoholicAttributes {
   weight: string;
   thing_type: string;
   shop: string;
+  photo?: string;
+
 }
 
 export type AlcoholicPk = 'id';
@@ -39,6 +41,8 @@ export class Alcoholic extends Model<AlcoholicAttributes, AlcoholicCreationAttri
   declare weight: string;
   declare thing_type: string;
   declare shop: string;
+  declare photo?: string;
+
 
 // Alcoholic hasMany object2Subplace via id
 object2subplaces!: Object2Subplace[];
@@ -114,6 +118,10 @@ static initModel(sequelize: Sequelize.Sequelize): typeof Alcoholic {
         shop: {
           type: DataTypes.TEXT,
           allowNull: true,
+        },
+        photo: {
+          type: DataTypes.STRING,
+          allowNull: true
         },
         createdAt: '',
         updatedAt: '',

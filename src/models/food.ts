@@ -14,6 +14,7 @@ export interface FoodAttributes {
   userid?: number;
   thing_type: string;
   shop?: string;
+  photo?: string;
 }
 
 export type FoodPk = 'id';
@@ -32,6 +33,8 @@ export class Food extends Model<FoodAttributes, FoodCreationAttributes> implemen
   declare userid?: number;
   declare thing_type: string;
   declare shop?: string;
+  declare photo?: string;
+
 
 
   // Food hasMany object2Subplace via id
@@ -98,6 +101,10 @@ export class Food extends Model<FoodAttributes, FoodCreationAttributes> implemen
         shop: {
           type: DataTypes.TEXT,
           allowNull: true,
+        },
+        photo: {
+          type: DataTypes.STRING,
+          allowNull: true
         },
         createdAt: '',
         updatedAt: '',

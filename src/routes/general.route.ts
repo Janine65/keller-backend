@@ -1,17 +1,18 @@
 import { Router } from 'express';
-import { Routes } from '@interfaces/routes.interface';
 import * as pkg from '../../package.json';
 
-export class GeneralRoute implements Routes {
-  public router = Router();
+  const generalRouter:Router = Router();
 
-  constructor() {
-    this.initializeRoutes();
-  }
+  /**
+   * @swagger
+   * /about:
+   *    get:
+ *      tags: 
+ *        - generel
+   *      description: Get the version
+   */
+  generalRouter.get('/about', function (req, res) {
+    res.json(pkg);
+  });
 
-  private initializeRoutes() {
-    this.router.get('/about', function (req, res) {
-      res.json(pkg);
-    });
-  }
-}
+export default generalRouter

@@ -12,6 +12,7 @@ export interface NonalcoholicAttributes {
   userid?: number;
   thing_type: string;
   shop?: string;
+  photo?: string;
 
 }
 
@@ -29,6 +30,7 @@ export class Nonalcoholic extends Model<NonalcoholicAttributes, NonalcoholicCrea
   declare userid?: number;
   declare thing_type: string;
   declare shop?: string;
+  declare photo?: string;
 
 
 // Nonalcoholic hasMany object2Subplace via id
@@ -85,6 +87,10 @@ countSubplaceid_subplaces!: Sequelize.BelongsToManyCountAssociationsMixin;
         shop: {
           type: DataTypes.TEXT,
           allowNull: true,
+        },
+        photo: {
+          type: DataTypes.STRING,
+          allowNull: true
         },
         createdAt: '',
         updatedAt: '',

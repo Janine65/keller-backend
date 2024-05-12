@@ -11,7 +11,7 @@ services:
     ports:
       - 3000:3000
       - 9229:9229
-    command: ["node", "--inspect=0.0.0.0:9229", "dist/server.js"]
+    command: ["node", "--inspect=0.0.0.0:9229", "dist/app.js"]
     networks:
       - back-tier
 

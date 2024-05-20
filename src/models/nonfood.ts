@@ -2,22 +2,14 @@ import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 import { Object2Subplace, Object2SubplaceId } from './object2Subplace';
 import { Subplace, SubplaceId } from './subplace';
+import { ThingAttributes, ThingOptionalAttributes } from './thing';
 
-export interface NonfoodAttributes {
-  id?: number;
-  name: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-  weight?: string;
-  userid?: number;
-  thing_type: string;
-  shop?: string;
-  photo?: string;
+export interface NonfoodAttributes extends ThingAttributes {
 }
 
 export type NonfoodPk = 'id';
 export type NonfoodId = Nonfood[NonfoodPk];
-export type NonfoodOptionalAttributes = 'shop' | 'userid';
+export type NonfoodOptionalAttributes = ThingOptionalAttributes;
 export type NonfoodCreationAttributes = Optional<NonfoodAttributes, NonfoodOptionalAttributes>;
 
 export class Nonfood extends Model<NonfoodAttributes, NonfoodCreationAttributes> implements NonfoodAttributes {
@@ -30,6 +22,7 @@ export class Nonfood extends Model<NonfoodAttributes, NonfoodCreationAttributes>
   declare thing_type: string;
   declare shop?: string;
   declare photo?: string;
+  declare levels?: Array<number>;
 
   // Nonfood hasMany object2Subplace via id
   object2subplaces!: Object2Subplace[];
@@ -89,6 +82,11 @@ export class Nonfood extends Model<NonfoodAttributes, NonfoodCreationAttributes>
         photo: {
           type: DataTypes.STRING,
           allowNull: true
+        },
+        levels: {
+          type: DataTypes.ARRAY(DataTypes.INTEGER),
+          allowNull: true,
+          defaultValue: '{1,3}'
         },
         createdAt: '',
         updatedAt: '',

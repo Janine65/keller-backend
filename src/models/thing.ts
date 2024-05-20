@@ -1,7 +1,6 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 import type { User, UserId } from './user';
-import { string } from 'buffer';
 
 export interface ThingAttributes {
   id?: number;
@@ -13,11 +12,12 @@ export interface ThingAttributes {
   thing_type: string;
   shop?: string;
   photo?: string;
+  levels?: Array<number>;
 }
 
 export type ThingPk = 'id';
 export type ThingId = Thing[ThingPk];
-export type ThingOptionalAttributes = 'shop' | 'photo' | 'id' | 'createdAt' | 'updatedAt' | 'userid';
+export type ThingOptionalAttributes = 'levels' | 'shop' | 'photo' | 'id' | 'createdAt' | 'updatedAt' | 'userid';
 export type thingCreationAttributes = Optional<ThingAttributes, ThingOptionalAttributes>;
 
 export class Thing extends Model<ThingAttributes, thingCreationAttributes> implements ThingAttributes {
@@ -30,6 +30,8 @@ export class Thing extends Model<ThingAttributes, thingCreationAttributes> imple
   declare thing_type: string;
   declare shop?: string;
   declare photo?: string;
+  declare levels?: Array<number>;
+  
 
 
   // Thing belongsTo user via userid
@@ -74,6 +76,11 @@ export class Thing extends Model<ThingAttributes, thingCreationAttributes> imple
         photo: {
           type: DataTypes.STRING,
           allowNull: true
+        },
+        levels: {
+          type: DataTypes.ARRAY(DataTypes.INTEGER),
+          allowNull: true,
+          defaultValue: '{1,3}'
         },
         createdAt: '',
         updatedAt: '',

@@ -2,24 +2,16 @@ import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 import { Object2Subplace, Object2SubplaceId } from './object2Subplace';
 import { Subplace, SubplaceId } from './subplace';
+import { ThingAttributes, ThingOptionalAttributes } from './thing';
 
-export interface FoodAttributes {
-  id?: number;
-  name: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-  weight?: string;
+export interface FoodAttributes extends ThingAttributes {
   vacuumed?: boolean;
   sealed?: boolean;
-  userid?: number;
-  thing_type: string;
-  shop?: string;
-  photo?: string;
 }
 
 export type FoodPk = 'id';
 export type FoodId = Food[FoodPk];
-export type FoodOptionalAttributes = 'shop' | 'vacuumed' | 'sealed' | 'userid';
+export type FoodOptionalAttributes = ThingOptionalAttributes | 'vacuumed' | 'sealed';
 export type FoodCreationAttributes = Optional<FoodAttributes, FoodOptionalAttributes>;
 
 export class Food extends Model<FoodAttributes, FoodCreationAttributes> implements FoodAttributes {
@@ -34,6 +26,7 @@ export class Food extends Model<FoodAttributes, FoodCreationAttributes> implemen
   declare thing_type: string;
   declare shop?: string;
   declare photo?: string;
+  declare levels?: Array<number>;
 
 
 
@@ -104,6 +97,10 @@ export class Food extends Model<FoodAttributes, FoodCreationAttributes> implemen
         },
         photo: {
           type: DataTypes.STRING,
+          allowNull: true
+        },
+        levels: {
+          type: DataTypes.ARRAY(DataTypes.INTEGER),
           allowNull: true
         },
         createdAt: '',

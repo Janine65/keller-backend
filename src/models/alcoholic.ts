@@ -2,29 +2,19 @@ import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 import { Object2Subplace, Object2SubplaceId } from './object2Subplace';
 import { Subplace, SubplaceId } from './subplace';
-import { STRING } from 'sequelize';
+import { ThingAttributes, ThingOptionalAttributes } from './thing';
 
-export interface AlcoholicAttributes {
-  id?: number;
-  name: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+export interface AlcoholicAttributes extends ThingAttributes {
   country?: string;
   region?: string;
   year?: number;
   grapes?: string[];
   type?: string;
-  userid?: number;
-  weight: string;
-  thing_type: string;
-  shop: string;
-  photo?: string;
-
 }
 
 export type AlcoholicPk = 'id';
 export type AlcoholicId = Alcoholic[AlcoholicPk];
-export type AlcoholicOptionalAttributes = 'shop' | 'country' | 'region' | 'year' | 'grapes' | 'userid';
+export type AlcoholicOptionalAttributes = ThingOptionalAttributes | 'country' | 'region' | 'year' | 'grapes';
 export type AlcoholicCreationAttributes = Optional<AlcoholicAttributes, AlcoholicOptionalAttributes>;
 
 export class Alcoholic extends Model<AlcoholicAttributes, AlcoholicCreationAttributes> implements AlcoholicAttributes {
@@ -42,6 +32,7 @@ export class Alcoholic extends Model<AlcoholicAttributes, AlcoholicCreationAttri
   declare thing_type: string;
   declare shop: string;
   declare photo?: string;
+  declare levels?: Array<number>;
 
 
 // Alcoholic hasMany object2Subplace via id
@@ -122,6 +113,11 @@ static initModel(sequelize: Sequelize.Sequelize): typeof Alcoholic {
         photo: {
           type: DataTypes.STRING,
           allowNull: true
+        },
+        levels: {
+          type: DataTypes.ARRAY(DataTypes.INTEGER),
+          allowNull: true,
+          defaultValue: '{1,3}'
         },
         createdAt: '',
         updatedAt: '',

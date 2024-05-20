@@ -2,23 +2,15 @@ import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 import { Object2Subplace, Object2SubplaceId } from './object2Subplace';
 import { Subplace, SubplaceId } from './subplace';
+import { ThingAttributes, ThingOptionalAttributes } from './thing';
 
-export interface NonalcoholicAttributes {
-  id?: number;
-  name: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-  weight?: string;
-  userid?: number;
-  thing_type: string;
-  shop?: string;
-  photo?: string;
+export interface NonalcoholicAttributes extends ThingAttributes {
 
 }
 
 export type NonalcoholicPk = 'id';
 export type NonalcoholicId = Nonalcoholic[NonalcoholicPk];
-export type NonalcoholicOptionalAttributes = 'shop' | 'weight' | 'userid';
+export type NonalcoholicOptionalAttributes = ThingOptionalAttributes;
 export type NonalcoholicCreationAttributes = Optional<NonalcoholicAttributes, NonalcoholicOptionalAttributes>;
 
 export class Nonalcoholic extends Model<NonalcoholicAttributes, NonalcoholicCreationAttributes> implements NonalcoholicAttributes {
@@ -31,6 +23,7 @@ export class Nonalcoholic extends Model<NonalcoholicAttributes, NonalcoholicCrea
   declare thing_type: string;
   declare shop?: string;
   declare photo?: string;
+  declare levels?: Array<number>;
 
 
 // Nonalcoholic hasMany object2Subplace via id
@@ -91,6 +84,11 @@ countSubplaceid_subplaces!: Sequelize.BelongsToManyCountAssociationsMixin;
         photo: {
           type: DataTypes.STRING,
           allowNull: true
+        },
+        levels: {
+          type: DataTypes.ARRAY(DataTypes.INTEGER),
+          allowNull: true,
+          defaultValue: '{1,3}'
         },
         createdAt: '',
         updatedAt: '',

@@ -50,7 +50,7 @@ authRouter.post('/login', ValidationMiddleware(AuthenticateUserDto), auth.logIn)
  *           type: object
  *           $ref: '#/definitions/users'
  */
-authRouter.post('/refreshToken', AuthMiddleware, auth.refreshToken);
+authRouter.post('/refreshToken', auth.refreshToken);
 /**
  * @swagger
  * /logout:

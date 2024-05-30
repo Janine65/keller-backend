@@ -9,7 +9,7 @@ COPY . .
 
 EXPOSE 3000
 
-RUN chown -R node /usr/src/keller-app
+#RUN chown -R node /usr/src/keller-app
 USER node
  
 # Cmd script

@@ -10,7 +10,7 @@ load_dotenv()
 APP_INFO = {
     "name": "keller-backend",
     "displayName": "Keller Organisator - Backend",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "description": "Python + FastAPI + SQLAlchemy + Postgres API Server",
     "author": {"name": "Janine Franken", "email": "janine@olconet.com"},
     "license": "ISC",

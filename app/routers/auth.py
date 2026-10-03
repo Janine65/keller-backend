@@ -13,7 +13,7 @@ router = APIRouter(tags=["auth"])
 
 @router.post("/signup", status_code=201)
 def sign_up(user_data: CreateUserDto, db: Session = Depends(get_db)):
-    existing = db.scalar(select(User).where(User.login == user_data.login))
+    existing = db.scalar(select(User).where(User.login == user_data.login.lower()))
     if existing:
         raise HTTPException(status_code=409, detail=f"This login {user_data.login} already exists")
 
@@ -31,7 +31,7 @@ def sign_up(user_data: CreateUserDto, db: Session = Depends(get_db)):
 
 @router.post("/login")
 def log_in(user_data: AuthenticateUserDto, response: Response, db: Session = Depends(get_db)):
-    user = db.scalar(select(User).where(User.login == user_data.login))
+    user = db.scalar(select(User).where(User.login == user_data.login.lower()))
     if not user:
         raise HTTPException(status_code=409, detail=f"This login {user_data.login} was not found")
     if not verify_password(user_data.password, user.password):

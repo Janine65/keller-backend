@@ -10,7 +10,7 @@ from app.serializers import to_dict, to_dict_list
 router = APIRouter(prefix="/users", tags=["users"])
 
 
-@router.get("/")
+@router.get("")
 def get_users(db: Session = Depends(get_db), _: User = Depends(get_current_user)):
     users = db.scalars(select(User)).all()
     return {"data": to_dict_list(list(users)), "message": "findAll"}

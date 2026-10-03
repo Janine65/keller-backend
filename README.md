@@ -35,6 +35,6 @@ Swagger-UI: http://localhost:3000/api-docs
 ## Docker
 
 ```bash
-docker build -t keller-backend-python .
-docker run --env-file .env -p 3000:3000 keller-backend-python
+docker build -t keller-backend .
+docker run --env-file .env -p 3000:3000 keller-backend
 ```

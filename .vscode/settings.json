@@ -1,0 +1,13 @@
+{
+    "python-envs.pythonProjects": [
+        {
+            "name": "keller-backend",
+            "path": "/home/frj/repos/keller-backend/.venv/bin/python"
+        },
+        {
+            "path": ".",
+            "envManager": "ms-python.python:venv",
+            "packageManager": "ms-python.python:pip"
+        }
+    ]
+}
